@@ -1,6 +1,6 @@
 
 import React from "react";
-import ContactForm from "@/components/ContactForm";
+import LoginForm from "@/components/LoginForm";
 
 const Index = () => {
   return (
@@ -11,20 +11,24 @@ const Index = () => {
       {/* Elemento decorativo laranja (canto inferior direito) */}
       <div className="absolute bottom-0 right-0 w-[45%] h-[50%] bg-contato-laranja transform rotate-[15deg] translate-x-[10%] translate-y-[20%] rounded-tl-[100px]"></div>
       
-      <div className="bg-white max-w-4xl w-full mx-4 p-8 md:p-12 relative z-10 shadow-lg rounded-lg my-8">
+      <div className="bg-white max-w-md w-full mx-4 p-8 md:p-12 relative z-10 shadow-lg rounded-lg my-8">
         {/* Logo placeholder */}
-        <div className="border border-gray-800 inline-block px-6 py-2 mb-10">
-          <span className="text-gray-800 text-lg">[Sua Logo]</span>
+        <div className="flex justify-center mb-8">
+          <div className="border border-gray-800 px-8 py-3 rounded">
+            <span className="text-gray-800 text-lg font-semibold">[Sua Logo]</span>
+          </div>
         </div>
         
         {/* Título e subtítulo */}
-        <h1 className="text-5xl font-bold text-contato-laranja mb-4">Entre em Contato</h1>
-        <p className="text-gray-800 text-lg mb-8">
-          Gostaríamos de ouvir de você. Envie-nos uma mensagem e retornaremos assim que possível.
-        </p>
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">Bem-vindo de volta</h1>
+          <p className="text-gray-600">
+            Faça login para acessar sua conta
+          </p>
+        </div>
         
-        {/* Formulário de contato */}
-        <ContactForm />
+        {/* Formulário de login */}
+        <LoginForm />
       </div>
     </div>
   );
