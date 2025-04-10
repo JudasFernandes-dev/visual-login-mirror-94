@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,10 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Cores personalizadas para o formulário
+				'contato-azul': '#0A3B8C',
+				'contato-laranja': '#F37C0F',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
