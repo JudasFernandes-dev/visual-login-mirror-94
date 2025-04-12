@@ -1,6 +1,7 @@
 
 import React from "react";
 import LoginForm from "@/components/LoginForm";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
@@ -29,6 +30,13 @@ const Index = () => {
         
         {/* Formulário de login */}
         <LoginForm />
+        
+        {/* Link para a página de usuário */}
+        <div className="mt-6 text-center">
+          <Link to="/usuario" className="text-contato-azul hover:underline">
+            Acessar página de usuário (demo)
+          </Link>
+        </div>
       </div>
     </div>
   );
