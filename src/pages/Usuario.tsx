@@ -14,39 +14,39 @@ import { Search, ChevronRight, ChevronLeft, User, Settings, Bell, Mail, LogOut, 
 // Componente da barra lateral (Sidebar)
 const Sidebar = () => {
   return (
-    <div className="bg-gradient-to-b from-blue-100 to-blue-200 min-h-screen w-64 flex-shrink-0 border-r border-gray-200 flex flex-col py-4 hidden md:flex">
+    <div className="bg-white min-h-screen w-64 flex-shrink-0 border-r border-gray-200 flex flex-col py-4 hidden md:flex">
       <div className="px-4 py-2">
-        <Avatar className="mx-auto h-12 w-12 bg-white">
+        <Avatar className="mx-auto h-12 w-12 bg-blue-100">
           <img src="public/lovable-uploads/44f613b9-3eea-42dd-a2c1-3cf64b70fa25.png" alt="Logo" className="h-8 w-8" />
         </Avatar>
       </div>
       
       <nav className="mt-6 flex-grow">
         <ul className="space-y-1 px-2">
-          <li className="px-4 py-2 text-blue-800 font-medium">Dashboards</li>
-          <li className="px-4 py-2 flex items-center space-x-3 text-blue-800 rounded hover:bg-blue-300 transition-colors">
+          <li className="px-4 py-2 text-gray-600 font-medium">Dashboards</li>
+          <li className="px-4 py-2 flex items-center space-x-3 text-gray-600 rounded hover:bg-gray-100 transition-colors">
             <Home size={16} />
             <span>Home</span>
           </li>
-          <li className="px-4 py-2 flex items-center space-x-3 text-blue-800 rounded hover:bg-blue-300 transition-colors">
+          <li className="px-4 py-2 flex items-center space-x-3 bg-blue-50 text-blue-700 rounded hover:bg-blue-100 transition-colors">
             <Users size={16} />
             <span>Usuários</span>
           </li>
-          <li className="px-4 py-2 flex items-center space-x-3 text-blue-800 rounded hover:bg-blue-300 transition-colors">
+          <li className="px-4 py-2 flex items-center space-x-3 text-gray-600 rounded hover:bg-gray-100 transition-colors">
             <BookOpen size={16} />
             <span>Projetos</span>
           </li>
-          <li className="px-4 py-2 flex items-center space-x-3 text-blue-800 rounded hover:bg-blue-300 transition-colors">
+          <li className="px-4 py-2 flex items-center space-x-3 text-gray-600 rounded hover:bg-gray-100 transition-colors">
             <Calendar size={16} />
             <span>Eventos</span>
           </li>
           
-          <li className="mt-8 px-4 py-2 text-blue-800 font-medium">Configurações</li>
-          <li className="px-4 py-2 flex items-center space-x-3 text-blue-800 rounded hover:bg-blue-300 transition-colors">
+          <li className="mt-8 px-4 py-2 text-gray-600 font-medium">Configurações</li>
+          <li className="px-4 py-2 flex items-center space-x-3 text-gray-600 rounded hover:bg-gray-100 transition-colors">
             <User size={16} />
             <span>Perfil</span>
           </li>
-          <li className="px-4 py-2 flex items-center space-x-3 text-blue-800 rounded hover:bg-blue-300 transition-colors">
+          <li className="px-4 py-2 flex items-center space-x-3 text-gray-600 rounded hover:bg-gray-100 transition-colors">
             <Settings size={16} />
             <span>Configurações</span>
           </li>
@@ -75,7 +75,7 @@ const Navbar = () => {
       <div className="flex justify-between items-center">
         <div className="flex space-x-4">
           <a href="/" className="text-gray-500 hover:text-blue-800">Home</a>
-          <a href="/contato" className="text-blue-800 font-medium">Contato</a>
+          <a href="/contato" className="text-gray-500 hover:text-blue-800">Contato</a>
           <a href="/sobre" className="text-gray-500 hover:text-blue-800">Sobre</a>
         </div>
         
@@ -99,7 +99,7 @@ const Navbar = () => {
 // Componente do rodapé (Footer)
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 py-8">
+    <footer className="bg-gray-50 py-8 border-t border-gray-200">
       <div className="container mx-auto px-4">
         <div className="text-center text-gray-600 mb-6">
           Conectando pessoas do mesmo cosmo
@@ -152,7 +152,7 @@ const Footer = () => {
             </a>
           </div>
           
-          <button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded">
+          <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded">
             Mensagem
           </button>
         </div>
@@ -207,8 +207,8 @@ const Projetos = () => {
   ];
 
   return (
-    <div className="w-full bg-white rounded-lg p-6">
-      <h2 className="text-lg font-medium text-blue-900 mb-4 pb-2 border-b border-gray-300">Projetos</h2>
+    <div className="w-full bg-white rounded-lg p-6 border border-gray-200">
+      <h2 className="text-lg font-medium text-gray-800 mb-4 pb-2 border-b border-gray-200">Projetos</h2>
       
       {/* Barra de pesquisa */}
       <div className="relative mb-6">
@@ -228,7 +228,7 @@ const Projetos = () => {
           <CarouselContent className="py-2">
             {categorias.map((categoria, index) => (
               <CarouselItem key={index} className={isMobile ? "basis-1/2" : "basis-1/5"}>
-                <div className="border border-gray-300 rounded-md px-4 py-2 text-center text-blue-900 text-sm hover:bg-blue-50 cursor-pointer">
+                <div className="border border-gray-300 rounded-md px-4 py-2 text-center text-gray-700 text-sm hover:bg-gray-50 cursor-pointer">
                   {categoria}
                 </div>
               </CarouselItem>
@@ -241,17 +241,17 @@ const Projetos = () => {
       
       {/* Projetos Destacados */}
       <div className="mb-8">
-        <h3 className="text-md font-medium text-blue-900 mb-4">Projetos Destacados</h3>
+        <h3 className="text-md font-medium text-gray-700 mb-4">Projetos Destacados</h3>
         
         <Carousel className="w-full">
           <CarouselContent>
             {projetos.slice(0, 3).map((projeto) => (
               <CarouselItem key={projeto.id} className={isMobile ? "basis-full md:basis-1/2" : "basis-1/3"}>
-                <div className="bg-blue-100 rounded-lg overflow-hidden">
+                <div className="bg-gray-50 rounded-lg overflow-hidden border border-gray-200">
                   <img src={projeto.imagem} alt={projeto.titulo} className="w-full h-32 object-cover" />
                   <div className="p-4">
                     <h4 className="font-medium">{projeto.titulo}</h4>
-                    <button className="mt-2 bg-blue-500 text-white text-sm px-4 py-1 rounded-md w-full">
+                    <button className="mt-2 bg-blue-600 text-white text-sm px-4 py-1 rounded-md w-full">
                       Detalhes
                     </button>
                   </div>
@@ -266,13 +266,13 @@ const Projetos = () => {
       
       {/* Hackathons */}
       <div className="mb-8">
-        <h3 className="text-md font-medium text-blue-900 mb-4">Hackathons</h3>
+        <h3 className="text-md font-medium text-gray-700 mb-4">Hackathons</h3>
         
         <Carousel className="w-full">
           <CarouselContent>
             {projetos.slice(3, 6).map((projeto) => (
               <CarouselItem key={projeto.id} className={isMobile ? "basis-full md:basis-1/2" : "basis-1/3"}>
-                <div className="bg-orange-100 rounded-lg overflow-hidden">
+                <div className="bg-orange-50 rounded-lg overflow-hidden border border-orange-100">
                   <img src={projeto.imagem} alt={projeto.titulo} className="w-full h-32 object-cover" />
                   <div className="p-4">
                     <h4 className="font-medium">{projeto.titulo}</h4>
@@ -292,17 +292,17 @@ const Projetos = () => {
       
       {/* Grupos */}
       <div>
-        <h3 className="text-md font-medium text-blue-900 mb-4">Grupos</h3>
+        <h3 className="text-md font-medium text-gray-700 mb-4">Grupos</h3>
         
         <Carousel className="w-full">
           <CarouselContent>
             {projetos.slice(0, 3).map((projeto) => (
               <CarouselItem key={projeto.id} className={isMobile ? "basis-full md:basis-1/2" : "basis-1/3"}>
-                <div className="bg-blue-100 rounded-lg overflow-hidden">
+                <div className="bg-gray-50 rounded-lg overflow-hidden border border-gray-200">
                   <img src={projeto.imagem} alt={projeto.titulo} className="w-full h-32 object-cover" />
                   <div className="p-4">
                     <h4 className="font-medium">{projeto.titulo}</h4>
-                    <button className="mt-2 bg-blue-500 text-white text-sm px-4 py-1 rounded-md w-full">
+                    <button className="mt-2 bg-blue-600 text-white text-sm px-4 py-1 rounded-md w-full">
                       Entrar
                     </button>
                   </div>
@@ -323,7 +323,7 @@ const PerfilUsuario = () => {
   return (
     <div className="bg-white rounded-lg p-4 w-full md:w-64 flex-shrink-0 border border-gray-200">
       <div className="flex justify-center mb-4">
-        <Avatar className="h-20 w-20 bg-blue-200 border-2 border-blue-500">
+        <Avatar className="h-20 w-20 bg-gray-200 border-2 border-blue-500">
           <img src="https://via.placeholder.com/80" alt="Foto do perfil" />
         </Avatar>
       </div>
@@ -334,7 +334,7 @@ const PerfilUsuario = () => {
       </div>
       
       <div className="space-y-3">
-        <h4 className="font-medium text-blue-800 text-sm">Contatos recentes</h4>
+        <h4 className="font-medium text-gray-700 text-sm">Contatos recentes</h4>
         <ul className="space-y-2">
           <li className="flex items-center space-x-2">
             <Avatar className="h-8 w-8 bg-gray-200">
@@ -371,7 +371,7 @@ const Usuario = () => {
       <div className="flex flex-grow">
         <Sidebar />
         
-        <div className="flex-grow bg-gray-100">
+        <div className="flex-grow bg-gray-50">
           <div className="container mx-auto py-4 px-4 flex flex-col md:flex-row gap-4">
             {isMobile ? (
               <>
