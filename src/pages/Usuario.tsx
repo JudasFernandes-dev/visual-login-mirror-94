@@ -168,42 +168,49 @@ const Projetos = () => {
   
   const categorias = ["Todos", "Design", "Desenvolvimento", "Marketing", "Gestão"];
   
+  // Array de projetos com estrutura consistente para manter a proporção
   const projetos = [
     {
       id: 1,
       titulo: "Projeto 1",
-      imagem: "https://via.placeholder.com/150",
-      categoria: "Design"
+      imagem: "https://via.placeholder.com/300x200",
+      categoria: "Design",
+      desc: "Descrição do projeto 1"
     },
     {
       id: 2,
       titulo: "Projeto 2",
-      imagem: "https://via.placeholder.com/150",
-      categoria: "Desenvolvimento"
+      imagem: "https://via.placeholder.com/300x200",
+      categoria: "Desenvolvimento",
+      desc: "Descrição do projeto 2"
     },
     {
       id: 3,
       titulo: "Projeto 3",
-      imagem: "https://via.placeholder.com/150",
-      categoria: "Marketing"
+      imagem: "https://via.placeholder.com/300x200",
+      categoria: "Marketing",
+      desc: "Descrição do projeto 3"
     },
     {
       id: 4,
       titulo: "Projeto 4",
-      imagem: "https://via.placeholder.com/150",
-      categoria: "Design"
+      imagem: "https://via.placeholder.com/300x200",
+      categoria: "Design",
+      desc: "Descrição do projeto 4"
     },
     {
       id: 5,
       titulo: "Projeto 5",
-      imagem: "https://via.placeholder.com/150",
-      categoria: "Gestão"
+      imagem: "https://via.placeholder.com/300x200",
+      categoria: "Gestão",
+      desc: "Descrição do projeto 5"
     },
     {
       id: 6,
       titulo: "Projeto 6",
-      imagem: "https://via.placeholder.com/150",
-      categoria: "Desenvolvimento"
+      imagem: "https://via.placeholder.com/300x200",
+      categoria: "Desenvolvimento",
+      desc: "Descrição do projeto 6"
     }
   ];
 
@@ -249,10 +256,11 @@ const Projetos = () => {
             <CarouselContent>
               {projetos.slice(0, 3).map((projeto) => (
                 <CarouselItem key={projeto.id} className={isMobile ? "basis-full" : "basis-1/3"}>
-                  <div className="bg-gray-50 rounded-lg overflow-hidden border border-gray-200">
-                    <img src={projeto.imagem} alt={projeto.titulo} className="w-full h-32 object-cover" />
+                  <div className="bg-gray-50 rounded-lg overflow-hidden border border-gray-200 h-full">
+                    <img src={projeto.imagem} alt={projeto.titulo} className="w-full h-40 object-cover" />
                     <div className="p-4">
                       <h4 className="font-medium">{projeto.titulo}</h4>
+                      <p className="text-sm text-gray-600 mb-4">{projeto.desc}</p>
                       <button className="mt-2 bg-blue-600 text-white text-sm px-4 py-1 rounded-md w-full">
                         Detalhes
                       </button>
@@ -274,11 +282,11 @@ const Projetos = () => {
             <CarouselContent>
               {projetos.slice(3, 6).map((projeto) => (
                 <CarouselItem key={projeto.id} className={isMobile ? "basis-full" : "basis-1/3"}>
-                  <div className="bg-orange-50 rounded-lg overflow-hidden border border-orange-100">
-                    <img src={projeto.imagem} alt={projeto.titulo} className="w-full h-32 object-cover" />
+                  <div className="bg-orange-50 rounded-lg overflow-hidden border border-orange-100 h-full">
+                    <img src={projeto.imagem} alt={projeto.titulo} className="w-full h-40 object-cover" />
                     <div className="p-4">
                       <h4 className="font-medium">{projeto.titulo}</h4>
-                      <p className="text-sm text-gray-600">Categoria: {projeto.categoria}</p>
+                      <p className="text-sm text-gray-600 mb-4">Categoria: {projeto.categoria}</p>
                       <button className="mt-2 bg-orange-500 text-white text-sm px-4 py-1 rounded-md w-full">
                         Participar
                       </button>
@@ -300,10 +308,11 @@ const Projetos = () => {
             <CarouselContent>
               {projetos.slice(0, 3).map((projeto) => (
                 <CarouselItem key={projeto.id} className={isMobile ? "basis-full" : "basis-1/3"}>
-                  <div className="bg-gray-50 rounded-lg overflow-hidden border border-gray-200">
-                    <img src={projeto.imagem} alt={projeto.titulo} className="w-full h-32 object-cover" />
+                  <div className="bg-gray-50 rounded-lg overflow-hidden border border-gray-200 h-full">
+                    <img src={projeto.imagem} alt={projeto.titulo} className="w-full h-40 object-cover" />
                     <div className="p-4">
                       <h4 className="font-medium">{projeto.titulo}</h4>
+                      <p className="text-sm text-gray-600 mb-4">{projeto.desc}</p>
                       <button className="mt-2 bg-blue-600 text-white text-sm px-4 py-1 rounded-md w-full">
                         Entrar
                       </button>
@@ -324,7 +333,7 @@ const Projetos = () => {
 // Componente de Perfil do Usuário
 const PerfilUsuario = () => {
   return (
-    <Card className="bg-white rounded-lg w-full md:w-64 border border-gray-200">
+    <Card className="bg-white rounded-lg w-full md:w-64 border border-gray-200 h-full">
       <CardContent className="p-4">
         <div className="flex justify-center mb-4">
           <Avatar className="h-20 w-20 bg-gray-200 border-2 border-blue-500">
@@ -379,7 +388,7 @@ const Usuario = () => {
         <div className="flex-grow bg-gray-50 overflow-y-auto">
           <div className="container mx-auto py-4 px-4">
             <div className="flex flex-col md:flex-row gap-4">
-              <div className="w-full md:w-auto">
+              <div className="w-full md:w-auto h-full">
                 <PerfilUsuario />
               </div>
               <div className="w-full">
