@@ -9,7 +9,8 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Search, ChevronRight, ChevronLeft, User, Settings, Bell, Mail, LogOut, Home, Calendar, Users, BookOpen, Star } from "lucide-react";
+import { Search, User, Settings, Bell, Home, Calendar, Users, BookOpen, Star } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 
 // Componente da barra lateral (Sidebar)
 const Sidebar = () => {
@@ -17,7 +18,7 @@ const Sidebar = () => {
     <div className="bg-white min-h-screen w-64 flex-shrink-0 border-r border-gray-200 flex flex-col py-4 hidden md:flex">
       <div className="px-4 py-2">
         <Avatar className="mx-auto h-12 w-12 bg-blue-100">
-          <img src="public/lovable-uploads/44f613b9-3eea-42dd-a2c1-3cf64b70fa25.png" alt="Logo" className="h-8 w-8" />
+          <img src="/lovable-uploads/44f613b9-3eea-42dd-a2c1-3cf64b70fa25.png" alt="Logo" className="h-8 w-8" />
         </Avatar>
       </div>
       
@@ -136,8 +137,8 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="mt-8 flex justify-between items-center border-t border-gray-300 pt-6">
-          <div className="flex space-x-4">
+        <div className="mt-8 flex flex-col md:flex-row justify-between items-center border-t border-gray-300 pt-6">
+          <div className="flex space-x-4 mb-4 md:mb-0">
             <a href="#" className="text-gray-600 hover:text-blue-800">
               <div className="h-8 w-8 bg-gray-200 rounded-full flex items-center justify-center">f</div>
             </a>
@@ -207,156 +208,160 @@ const Projetos = () => {
   ];
 
   return (
-    <div className="w-full bg-white rounded-lg p-6 border border-gray-200">
-      <h2 className="text-lg font-medium text-gray-800 mb-4 pb-2 border-b border-gray-200">Projetos</h2>
-      
-      {/* Barra de pesquisa */}
-      <div className="relative mb-6">
-        <input 
-          type="search" 
-          placeholder="Procurar..." 
-          className="w-full px-4 py-2 border border-gray-300 rounded-md"
-        />
-        <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-orange-500 text-white px-3 py-1 rounded-md text-sm">
-          Buscar
-        </button>
-      </div>
-      
-      {/* Categorias */}
-      <div className="mb-8">
-        <Carousel className="w-full">
-          <CarouselContent className="py-2">
-            {categorias.map((categoria, index) => (
-              <CarouselItem key={index} className={isMobile ? "basis-1/2" : "basis-1/5"}>
-                <div className="border border-gray-300 rounded-md px-4 py-2 text-center text-gray-700 text-sm hover:bg-gray-50 cursor-pointer">
-                  {categoria}
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="left-0" />
-          <CarouselNext className="right-0" />
-        </Carousel>
-      </div>
-      
-      {/* Projetos Destacados */}
-      <div className="mb-8">
-        <h3 className="text-md font-medium text-gray-700 mb-4">Projetos Destacados</h3>
+    <Card className="w-full bg-white rounded-lg border border-gray-200">
+      <CardContent className="p-6">
+        <h2 className="text-lg font-medium text-gray-800 mb-4 pb-2 border-b border-gray-200">Projetos</h2>
         
-        <Carousel className="w-full">
-          <CarouselContent>
-            {projetos.slice(0, 3).map((projeto) => (
-              <CarouselItem key={projeto.id} className={isMobile ? "basis-full md:basis-1/2" : "basis-1/3"}>
-                <div className="bg-gray-50 rounded-lg overflow-hidden border border-gray-200">
-                  <img src={projeto.imagem} alt={projeto.titulo} className="w-full h-32 object-cover" />
-                  <div className="p-4">
-                    <h4 className="font-medium">{projeto.titulo}</h4>
-                    <button className="mt-2 bg-blue-600 text-white text-sm px-4 py-1 rounded-md w-full">
-                      Detalhes
-                    </button>
-                  </div>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="left-0" />
-          <CarouselNext className="right-0" />
-        </Carousel>
-      </div>
-      
-      {/* Hackathons */}
-      <div className="mb-8">
-        <h3 className="text-md font-medium text-gray-700 mb-4">Hackathons</h3>
+        {/* Barra de pesquisa */}
+        <div className="relative mb-6">
+          <input 
+            type="search" 
+            placeholder="Procurar..." 
+            className="w-full px-4 py-2 border border-gray-300 rounded-md"
+          />
+          <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-orange-500 text-white px-3 py-1 rounded-md text-sm">
+            Buscar
+          </button>
+        </div>
         
-        <Carousel className="w-full">
-          <CarouselContent>
-            {projetos.slice(3, 6).map((projeto) => (
-              <CarouselItem key={projeto.id} className={isMobile ? "basis-full md:basis-1/2" : "basis-1/3"}>
-                <div className="bg-orange-50 rounded-lg overflow-hidden border border-orange-100">
-                  <img src={projeto.imagem} alt={projeto.titulo} className="w-full h-32 object-cover" />
-                  <div className="p-4">
-                    <h4 className="font-medium">{projeto.titulo}</h4>
-                    <p className="text-sm text-gray-600">Categoria: {projeto.categoria}</p>
-                    <button className="mt-2 bg-orange-500 text-white text-sm px-4 py-1 rounded-md w-full">
-                      Participar
-                    </button>
+        {/* Categorias */}
+        <div className="mb-8">
+          <Carousel className="w-full">
+            <CarouselContent className="py-2">
+              {categorias.map((categoria, index) => (
+                <CarouselItem key={index} className={isMobile ? "basis-1/2" : "basis-1/5"}>
+                  <div className="border border-gray-300 rounded-md px-4 py-2 text-center text-gray-700 text-sm hover:bg-gray-50 cursor-pointer">
+                    {categoria}
                   </div>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="left-0" />
-          <CarouselNext className="right-0" />
-        </Carousel>
-      </div>
-      
-      {/* Grupos */}
-      <div>
-        <h3 className="text-md font-medium text-gray-700 mb-4">Grupos</h3>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-0" />
+            <CarouselNext className="right-0" />
+          </Carousel>
+        </div>
         
-        <Carousel className="w-full">
-          <CarouselContent>
-            {projetos.slice(0, 3).map((projeto) => (
-              <CarouselItem key={projeto.id} className={isMobile ? "basis-full md:basis-1/2" : "basis-1/3"}>
-                <div className="bg-gray-50 rounded-lg overflow-hidden border border-gray-200">
-                  <img src={projeto.imagem} alt={projeto.titulo} className="w-full h-32 object-cover" />
-                  <div className="p-4">
-                    <h4 className="font-medium">{projeto.titulo}</h4>
-                    <button className="mt-2 bg-blue-600 text-white text-sm px-4 py-1 rounded-md w-full">
-                      Entrar
-                    </button>
+        {/* Projetos Destacados */}
+        <div className="mb-8">
+          <h3 className="text-md font-medium text-gray-700 mb-4">Projetos Destacados</h3>
+          
+          <Carousel className="w-full">
+            <CarouselContent>
+              {projetos.slice(0, 3).map((projeto) => (
+                <CarouselItem key={projeto.id} className={isMobile ? "basis-full" : "basis-1/3"}>
+                  <div className="bg-gray-50 rounded-lg overflow-hidden border border-gray-200">
+                    <img src={projeto.imagem} alt={projeto.titulo} className="w-full h-32 object-cover" />
+                    <div className="p-4">
+                      <h4 className="font-medium">{projeto.titulo}</h4>
+                      <button className="mt-2 bg-blue-600 text-white text-sm px-4 py-1 rounded-md w-full">
+                        Detalhes
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="left-0" />
-          <CarouselNext className="right-0" />
-        </Carousel>
-      </div>
-    </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-0" />
+            <CarouselNext className="right-0" />
+          </Carousel>
+        </div>
+        
+        {/* Hackathons */}
+        <div className="mb-8">
+          <h3 className="text-md font-medium text-gray-700 mb-4">Hackathons</h3>
+          
+          <Carousel className="w-full">
+            <CarouselContent>
+              {projetos.slice(3, 6).map((projeto) => (
+                <CarouselItem key={projeto.id} className={isMobile ? "basis-full" : "basis-1/3"}>
+                  <div className="bg-orange-50 rounded-lg overflow-hidden border border-orange-100">
+                    <img src={projeto.imagem} alt={projeto.titulo} className="w-full h-32 object-cover" />
+                    <div className="p-4">
+                      <h4 className="font-medium">{projeto.titulo}</h4>
+                      <p className="text-sm text-gray-600">Categoria: {projeto.categoria}</p>
+                      <button className="mt-2 bg-orange-500 text-white text-sm px-4 py-1 rounded-md w-full">
+                        Participar
+                      </button>
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-0" />
+            <CarouselNext className="right-0" />
+          </Carousel>
+        </div>
+        
+        {/* Grupos */}
+        <div>
+          <h3 className="text-md font-medium text-gray-700 mb-4">Grupos</h3>
+          
+          <Carousel className="w-full">
+            <CarouselContent>
+              {projetos.slice(0, 3).map((projeto) => (
+                <CarouselItem key={projeto.id} className={isMobile ? "basis-full" : "basis-1/3"}>
+                  <div className="bg-gray-50 rounded-lg overflow-hidden border border-gray-200">
+                    <img src={projeto.imagem} alt={projeto.titulo} className="w-full h-32 object-cover" />
+                    <div className="p-4">
+                      <h4 className="font-medium">{projeto.titulo}</h4>
+                      <button className="mt-2 bg-blue-600 text-white text-sm px-4 py-1 rounded-md w-full">
+                        Entrar
+                      </button>
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-0" />
+            <CarouselNext className="right-0" />
+          </Carousel>
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 
 // Componente de Perfil do Usuário
 const PerfilUsuario = () => {
   return (
-    <div className="bg-white rounded-lg p-4 w-full md:w-64 flex-shrink-0 border border-gray-200">
-      <div className="flex justify-center mb-4">
-        <Avatar className="h-20 w-20 bg-gray-200 border-2 border-blue-500">
-          <img src="https://via.placeholder.com/80" alt="Foto do perfil" />
-        </Avatar>
-      </div>
-      
-      <div className="text-center mb-4">
-        <h3 className="font-medium text-lg">João Silva</h3>
-        <p className="text-gray-600 text-sm">@joaosilva</p>
-      </div>
-      
-      <div className="space-y-3">
-        <h4 className="font-medium text-gray-700 text-sm">Contatos recentes</h4>
-        <ul className="space-y-2">
-          <li className="flex items-center space-x-2">
-            <Avatar className="h-8 w-8 bg-gray-200">
-              <User size={16} />
-            </Avatar>
-            <span className="text-sm">Maria Santos</span>
-          </li>
-          <li className="flex items-center space-x-2">
-            <Avatar className="h-8 w-8 bg-gray-200">
-              <User size={16} />
-            </Avatar>
-            <span className="text-sm">Carlos Oliveira</span>
-          </li>
-          <li className="flex items-center space-x-2">
-            <Avatar className="h-8 w-8 bg-gray-200">
-              <User size={16} />
-            </Avatar>
-            <span className="text-sm">Ana Costa</span>
-          </li>
-        </ul>
-      </div>
-    </div>
+    <Card className="bg-white rounded-lg w-full md:w-64 border border-gray-200">
+      <CardContent className="p-4">
+        <div className="flex justify-center mb-4">
+          <Avatar className="h-20 w-20 bg-gray-200 border-2 border-blue-500">
+            <User size={32} />
+          </Avatar>
+        </div>
+        
+        <div className="text-center mb-4">
+          <h3 className="font-medium text-lg">João Silva</h3>
+          <p className="text-gray-600 text-sm">@joaosilva</p>
+        </div>
+        
+        <div className="space-y-3">
+          <h4 className="font-medium text-gray-700 text-sm">Contatos recentes</h4>
+          <ul className="space-y-2">
+            <li className="flex items-center space-x-2">
+              <Avatar className="h-8 w-8 bg-gray-200">
+                <User size={16} />
+              </Avatar>
+              <span className="text-sm">Maria Santos</span>
+            </li>
+            <li className="flex items-center space-x-2">
+              <Avatar className="h-8 w-8 bg-gray-200">
+                <User size={16} />
+              </Avatar>
+              <span className="text-sm">Carlos Oliveira</span>
+            </li>
+            <li className="flex items-center space-x-2">
+              <Avatar className="h-8 w-8 bg-gray-200">
+                <User size={16} />
+              </Avatar>
+              <span className="text-sm">Ana Costa</span>
+            </li>
+          </ul>
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 
@@ -371,21 +376,16 @@ const Usuario = () => {
       <div className="flex flex-grow">
         <Sidebar />
         
-        <div className="flex-grow bg-gray-50">
-          <div className="container mx-auto py-4 px-4 flex flex-col md:flex-row gap-4">
-            {isMobile ? (
-              <>
-                <div className="w-full flex flex-col md:flex-row gap-4">
-                  <PerfilUsuario />
-                  <Projetos />
-                </div>
-              </>
-            ) : (
-              <>
+        <div className="flex-grow bg-gray-50 overflow-y-auto">
+          <div className="container mx-auto py-4 px-4">
+            <div className="flex flex-col md:flex-row gap-4">
+              <div className="w-full md:w-auto">
                 <PerfilUsuario />
+              </div>
+              <div className="w-full">
                 <Projetos />
-              </>
-            )}
+              </div>
+            </div>
           </div>
         </div>
       </div>
