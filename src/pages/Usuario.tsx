@@ -9,61 +9,91 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Search, User, Settings, Bell, Home, Calendar, Users, BookOpen, Star } from "lucide-react";
+import { Search, User, Settings, Bell, Home, MessageSquare, Users, FileText, Building, Github, Linkedin, Link2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 // Componente da barra lateral (Sidebar)
 const Sidebar = () => {
   return (
-    <div className="bg-white min-h-screen w-64 flex-shrink-0 border-r border-gray-200 flex flex-col py-4 hidden md:flex">
-      <div className="px-4 py-2">
-        <Avatar className="mx-auto h-12 w-12 bg-blue-100">
-          <img src="/lovable-uploads/44f613b9-3eea-42dd-a2c1-3cf64b70fa25.png" alt="Logo" className="h-8 w-8" />
+    <div className="bg-gradient-to-b from-[#D3E4FD] to-[#E5DEFF] min-h-screen w-64 flex-shrink-0 flex flex-col py-4 hidden md:flex">
+      <div className="px-4 py-2 flex flex-col items-center">
+        <Avatar className="h-16 w-16 border-2 border-white bg-white">
+          <img src="/lovable-uploads/63498272-71ed-42ba-8c2f-2666d4afa1fd.png" alt="Profile" className="rounded-full" />
         </Avatar>
+        <span className="mt-2 text-gray-700 text-sm">nome</span>
       </div>
       
-      <nav className="mt-6 flex-grow">
-        <ul className="space-y-1 px-2">
-          <li className="px-4 py-2 text-gray-600 font-medium">Dashboards</li>
-          <li className="px-4 py-2 flex items-center space-x-3 text-gray-600 rounded hover:bg-gray-100 transition-colors">
-            <Home size={16} />
-            <span>Home</span>
+      <nav className="mt-6 flex-grow px-4">
+        <ul className="space-y-3">
+          <li className="flex items-center space-x-3 text-gray-700">
+            <Building size={16} className="text-gray-700" />
+            <span className="text-sm">Função</span>
           </li>
-          <li className="px-4 py-2 flex items-center space-x-3 bg-blue-50 text-blue-700 rounded hover:bg-blue-100 transition-colors">
-            <Users size={16} />
-            <span>Usuários</span>
+          <li className="flex items-center space-x-3 text-gray-700">
+            <Github size={16} className="text-gray-700" />
+            <span className="text-sm">Github</span>
           </li>
-          <li className="px-4 py-2 flex items-center space-x-3 text-gray-600 rounded hover:bg-gray-100 transition-colors">
-            <BookOpen size={16} />
-            <span>Projetos</span>
+          <li className="flex items-center space-x-3 text-gray-700">
+            <Linkedin size={16} className="text-gray-700" />
+            <span className="text-sm">Linkedin</span>
           </li>
-          <li className="px-4 py-2 flex items-center space-x-3 text-gray-600 rounded hover:bg-gray-100 transition-colors">
-            <Calendar size={16} />
-            <span>Eventos</span>
+          <li className="flex items-center space-x-3 text-gray-700">
+            <Link2 size={16} className="text-gray-700" />
+            <span className="text-sm">Link</span>
           </li>
           
-          <li className="mt-8 px-4 py-2 text-gray-600 font-medium">Configurações</li>
-          <li className="px-4 py-2 flex items-center space-x-3 text-gray-600 rounded hover:bg-gray-100 transition-colors">
-            <User size={16} />
-            <span>Perfil</span>
+          <li className="my-4 flex justify-center">
+            <Button className="bg-blue-400 hover:bg-blue-500 rounded-full text-white text-xs py-1 px-5">
+              Editar Perfil
+            </Button>
           </li>
-          <li className="px-4 py-2 flex items-center space-x-3 text-gray-600 rounded hover:bg-gray-100 transition-colors">
-            <Settings size={16} />
-            <span>Configurações</span>
+          
+          <li className="flex items-center space-x-3 text-gray-700">
+            <Home size={16} className="text-gray-700" />
+            <span className="text-sm">Página Inicial</span>
+          </li>
+          <li className="flex items-center space-x-3 text-gray-700">
+            <Bell size={16} className="text-gray-700" />
+            <span className="text-sm">Notificações</span>
+          </li>
+          <li className="flex items-center space-x-3 text-gray-700">
+            <MessageSquare size={16} className="text-gray-700" />
+            <span className="text-sm">Mensagens</span>
+          </li>
+          <li className="flex items-center space-x-3 text-gray-700">
+            <img src="/lovable-uploads/44f613b9-3eea-42dd-a2c1-3cf64b70fa25.png" alt="Hackathon" className="h-4 w-4" />
+            <span className="text-sm">Hackathons</span>
+          </li>
+          <li className="flex items-center space-x-3 text-gray-700">
+            <FileText size={16} className="text-gray-700" />
+            <span className="text-sm">Projetos</span>
+          </li>
+          <li className="flex items-center space-x-3 text-gray-700">
+            <Users size={16} className="text-gray-700" />
+            <span className="text-sm">Equipes</span>
+          </li>
+          <li className="flex items-center space-x-3 text-gray-700">
+            <User size={16} className="text-gray-700" />
+            <span className="text-sm">Perfil</span>
+          </li>
+          <li className="flex items-center space-x-3 text-gray-700">
+            <Settings size={16} className="text-gray-700" />
+            <span className="text-sm">Configurações</span>
           </li>
         </ul>
       </nav>
       
-      <div className="mt-auto px-4 py-2 flex justify-around">
-        <Avatar className="h-8 w-8 bg-orange-300 flex items-center justify-center text-white">
-          <span>1</span>
-        </Avatar>
-        <Avatar className="h-8 w-8 bg-yellow-300 flex items-center justify-center text-white">
-          <span>2</span>
-        </Avatar>
-        <Avatar className="h-8 w-8 bg-green-300 flex items-center justify-center text-white">
-          <span>3</span>
-        </Avatar>
+      <div className="mt-auto px-4 py-4 flex justify-around border-t border-gray-300 mx-4">
+        <div className="h-10 w-10 rounded-full bg-[#F4D35E] border border-gray-400 flex items-center justify-center text-white overflow-hidden">
+          <img src="https://via.placeholder.com/40" alt="Skill 1" className="h-full w-full object-cover" />
+        </div>
+        <div className="h-10 w-10 rounded-full bg-[#50B2C0] border border-gray-400 flex items-center justify-center text-white overflow-hidden">
+          <img src="https://via.placeholder.com/40" alt="Skill 2" className="h-full w-full object-cover" />
+        </div>
+        <div className="h-10 w-10 rounded-full bg-[#EE6C4D] border border-gray-400 flex items-center justify-center text-white overflow-hidden">
+          <img src="https://via.placeholder.com/40" alt="Skill 3" className="h-full w-full object-cover" />
+        </div>
       </div>
     </div>
   );
@@ -248,7 +278,7 @@ const Projetos = () => {
           </Carousel>
         </div>
         
-        {/* Projetos Destacados */}
+        {/* Projetos destacados */}
         <div className="mb-8">
           <h3 className="text-md font-medium text-gray-700 mb-4">Projetos Destacados</h3>
           
