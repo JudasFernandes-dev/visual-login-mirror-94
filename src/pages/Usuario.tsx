@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { 
@@ -15,6 +16,59 @@ import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Popover, PopoverTrigger, PopoverContent, ChatPopoverContent } from "@/components/ui/popover";
 import { useToast } from "@/hooks/use-toast";
+import { Progress } from "@/components/ui/progress";
+
+// Componente para o progresso dos selos
+const ProgressoSelos = () => {
+  const selos = [
+    {
+      id: 1,
+      nome: "Desenvolvedor Experiente",
+      progresso: 75,
+      icon: "public/lovable-uploads/d3e05fe7-e4a5-4258-9a43-c1a878a42ddc.png",
+      color: "bg-yellow-500"
+    },
+    {
+      id: 2,
+      nome: "Mestre dos Hackathons",
+      progresso: 45,
+      icon: "https://via.placeholder.com/40",
+      color: "bg-blue-500"
+    },
+    {
+      id: 3,
+      nome: "Colaborador Elite",
+      progresso: 30,
+      icon: "https://via.placeholder.com/40",
+      color: "bg-green-500"
+    }
+  ];
+
+  return (
+    <Card className="w-full bg-white rounded-lg border border-gray-200 mb-4">
+      <CardContent className="p-4">
+        <h2 className="text-base font-medium text-gray-800 mb-3 pb-1 border-b border-gray-200">Progresso dos selos</h2>
+        
+        <div className="space-y-4">
+          {selos.map((selo) => (
+            <div key={selo.id} className="flex items-center space-x-3">
+              <div className={`h-8 w-8 rounded-full ${selo.color} flex items-center justify-center text-white overflow-hidden`}>
+                <img src={selo.icon} alt={selo.nome} className="h-full w-full object-cover" />
+              </div>
+              <div className="flex-1">
+                <div className="flex justify-between mb-1">
+                  <p className="text-sm font-medium">{selo.nome}</p>
+                  <span className="text-xs text-gray-500">{selo.progresso}%</span>
+                </div>
+                <Progress value={selo.progresso} className="h-2" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
 
 // Componente da barra lateral (Sidebar)
 const Sidebar = () => {
@@ -205,56 +259,56 @@ const Footer = () => {
 const Linguagens = () => {
   return (
     <Card className="w-full bg-white rounded-lg border border-gray-200 mb-4">
-      <CardContent className="p-4">
-        <h2 className="text-base font-medium text-gray-800 mb-3 pb-1 border-b border-gray-200">Linguagens</h2>
+      <CardContent className="p-3">
+        <h2 className="text-base font-medium text-gray-800 mb-2 pb-1 border-b border-gray-200">Linguagens</h2>
         
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-3 gap-2">
           <div className="flex items-center space-x-2">
-            <div className="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center text-white">
-              <Code size={16} />
+            <div className="h-7 w-7 rounded-full bg-blue-500 flex items-center justify-center text-white">
+              <Code size={14} />
             </div>
             <div>
-              <p className="font-medium text-sm">JavaScript</p>
+              <p className="font-medium text-xs">JavaScript</p>
               <p className="text-xs text-gray-500">Avançado</p>
             </div>
           </div>
           
           <div className="flex items-center space-x-2">
-            <div className="h-8 w-8 rounded-full bg-green-500 flex items-center justify-center text-white">
-              <Code size={16} />
+            <div className="h-7 w-7 rounded-full bg-green-500 flex items-center justify-center text-white">
+              <Code size={14} />
             </div>
             <div>
-              <p className="font-medium text-sm">Python</p>
+              <p className="font-medium text-xs">Python</p>
               <p className="text-xs text-gray-500">Intermediário</p>
             </div>
           </div>
           
           <div className="flex items-center space-x-2">
-            <div className="h-8 w-8 rounded-full bg-yellow-500 flex items-center justify-center text-white">
-              <Code size={16} />
+            <div className="h-7 w-7 rounded-full bg-yellow-500 flex items-center justify-center text-white">
+              <Code size={14} />
             </div>
             <div>
-              <p className="font-medium text-sm">HTML/CSS</p>
+              <p className="font-medium text-xs">HTML/CSS</p>
               <p className="text-xs text-gray-500">Avançado</p>
             </div>
           </div>
           
           <div className="flex items-center space-x-2">
-            <div className="h-8 w-8 rounded-full bg-red-500 flex items-center justify-center text-white">
-              <Globe size={16} />
+            <div className="h-7 w-7 rounded-full bg-red-500 flex items-center justify-center text-white">
+              <Globe size={14} />
             </div>
             <div>
-              <p className="font-medium text-sm">Inglês</p>
+              <p className="font-medium text-xs">Inglês</p>
               <p className="text-xs text-gray-500">Fluente</p>
             </div>
           </div>
           
           <div className="flex items-center space-x-2">
-            <div className="h-8 w-8 rounded-full bg-purple-500 flex items-center justify-center text-white">
-              <Globe size={16} />
+            <div className="h-7 w-7 rounded-full bg-purple-500 flex items-center justify-center text-white">
+              <Globe size={14} />
             </div>
             <div>
-              <p className="font-medium text-sm">Espanhol</p>
+              <p className="font-medium text-xs">Espanhol</p>
               <p className="text-xs text-gray-500">Intermediário</p>
             </div>
           </div>
@@ -493,7 +547,7 @@ const LinkedInChat = () => {
         <PopoverTrigger asChild>
           <Button 
             variant="outline" 
-            className={`rounded-full p-3 shadow-lg border border-gray-300 ${isOpen ? 'bg-blue-100' : 'bg-white'} hover:bg-blue-50`}
+            className={`rounded-md p-3 shadow-lg border border-gray-300 ${isOpen ? 'bg-blue-100' : 'bg-white'} hover:bg-blue-50`}
           >
             <div className="flex items-center space-x-2">
               <Avatar className="h-8 w-8 border border-gray-300">
@@ -620,6 +674,7 @@ const Usuario = () => {
           <div className="container mx-auto py-4 px-4">
             <div className="flex flex-col gap-4">
               <Linguagens />
+              <ProgressoSelos />
               <Projetos />
             </div>
           </div>
