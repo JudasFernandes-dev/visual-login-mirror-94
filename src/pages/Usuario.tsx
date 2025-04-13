@@ -1,5 +1,4 @@
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { 
   Carousel,
@@ -9,7 +8,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Search, User, Settings, Bell, Home, MessageSquare, Users, FileText, Building, Github, Linkedin, Link2, Code, Globe, MoreHorizontal, X, Paperclip, Send } from "lucide-react";
+import { Search, User, Settings, Bell, Home, MessageSquare, Users, FileText, Building, Github, Linkedin, Link2, Code, Globe, MoreHorizontal, X, Paperclip, Send, Plus, Trash2, Edit, Check } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -17,30 +16,276 @@ import { Input } from "@/components/ui/input";
 import { Popover, PopoverTrigger, PopoverContent, ChatPopoverContent } from "@/components/ui/popover";
 import { useToast } from "@/hooks/use-toast";
 import { Progress } from "@/components/ui/progress";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-// Componente para o progresso dos selos
+const Linguagens = () => {
+  const { toast } = useToast();
+  const [languages, setLanguages] = useState([
+    {
+      id: 1,
+      name: "JavaScript",
+      type: "programming",
+      level: "Avançado",
+      color: "bg-blue-500"
+    },
+    {
+      id: 2,
+      name: "Python",
+      type: "programming",
+      level: "Intermediário",
+      color: "bg-green-500"
+    },
+    {
+      id: 3,
+      name: "HTML/CSS",
+      type: "programming",
+      level: "Avançado",
+      color: "bg-yellow-500"
+    },
+    {
+      id: 4,
+      name: "Inglês",
+      type: "language",
+      level: "Fluente",
+      color: "bg-red-500"
+    },
+    {
+      id: 5,
+      name: "Espanhol",
+      type: "language",
+      level: "Intermediário",
+      color: "bg-purple-500"
+    }
+  ]);
+
+  const [newLanguage, setNewLanguage] = useState({
+    name: "",
+    type: "programming",
+    level: "Iniciante"
+  });
+
+  const [editMode, setEditMode] = useState(null);
+
+  const levels = ["Iniciante", "Básico", "Intermediário", "Avançado", "Fluente"];
+  const types = ["programming", "language"];
+
+  const typeColors = {
+    programming: ["bg-blue-500", "bg-green-500", "bg-yellow-500", "bg-orange-500"],
+    language: ["bg-red-500", "bg-purple-500", "bg-pink-500", "bg-indigo-500"]
+  };
+
+  const handleAddLanguage = () => {
+    if (newLanguage.name.trim() === "") {
+      toast({
+        title: "Erro",
+        description: "Nome da linguagem não pode estar vazio",
+      });
+      return;
+    }
+
+    const colorPool = typeColors[newLanguage.type];
+    const randomColor = colorPool[Math.floor(Math.random() * colorPool.length)];
+
+    const newId = languages.length > 0 ? Math.max(...languages.map(l => l.id)) + 1 : 1;
+    
+    setLanguages([...languages, { 
+      id: newId,
+      name: newLanguage.name,
+      type: newLanguage.type,
+      level: newLanguage.level,
+      color: randomColor
+    }]);
+    
+    setNewLanguage({
+      name: "",
+      type: "programming",
+      level: "Iniciante"
+    });
+    
+    toast({
+      title: "Sucesso",
+      description: "Linguagem adicionada com sucesso!",
+    });
+  };
+
+  const handleRemoveLanguage = (id) => {
+    setLanguages(languages.filter(lang => lang.id !== id));
+    toast({
+      description: "Linguagem removida com sucesso!",
+    });
+  };
+
+  const handleEdit = (language) => {
+    setEditMode(language.id);
+  };
+
+  const saveEdit = (id) => {
+    setEditMode(null);
+    toast({
+      description: "Informação atualizada com sucesso!",
+    });
+  };
+
+  const handleChange = (id, field, value) => {
+    setLanguages(languages.map(lang => 
+      lang.id === id ? { ...lang, [field]: value } : lang
+    ));
+  };
+
+  return (
+    <Card className="w-full bg-white rounded-lg border border-gray-200 mb-4">
+      <CardContent className="p-3">
+        <h2 className="text-base font-medium text-gray-800 mb-2 pb-1 border-b border-gray-200">Linguagens</h2>
+        
+        <div className="grid grid-cols-3 gap-2 mb-3">
+          {languages.map((language) => (
+            <div key={language.id} className="flex items-center space-x-2 group relative">
+              {editMode === language.id ? (
+                <div className="flex items-center space-x-1 w-full">
+                  <div className={`h-7 w-7 rounded-full ${language.color} flex items-center justify-center text-white`}>
+                    {language.type === "programming" ? <Code size={14} /> : <Globe size={14} />}
+                  </div>
+                  <div className="flex-1">
+                    <Input
+                      value={language.name}
+                      onChange={(e) => handleChange(language.id, "name", e.target.value)}
+                      className="h-6 text-xs mb-1 p-1"
+                    />
+                    <Select
+                      value={language.level}
+                      onValueChange={(value) => handleChange(language.id, "level", value)}
+                    >
+                      <SelectTrigger className="h-6 text-xs p-1">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {levels.map((level) => (
+                          <SelectItem key={level} value={level} className="text-xs">
+                            {level}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <Button size="icon" variant="ghost" className="h-6 w-6" onClick={() => saveEdit(language.id)}>
+                    <Check size={14} />
+                  </Button>
+                </div>
+              ) : (
+                <>
+                  <div className={`h-7 w-7 rounded-full ${language.color} flex items-center justify-center text-white`}>
+                    {language.type === "programming" ? <Code size={14} /> : <Globe size={14} />}
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-medium text-xs">{language.name}</p>
+                    <p className="text-xs text-gray-500">{language.level}</p>
+                  </div>
+                  <div className="hidden group-hover:flex absolute right-0 space-x-1">
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className="h-5 w-5"
+                      onClick={() => handleEdit(language)}
+                    >
+                      <Edit size={12} />
+                    </Button>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className="h-5 w-5"
+                      onClick={() => handleRemoveLanguage(language.id)}
+                    >
+                      <Trash2 size={12} />
+                    </Button>
+                  </div>
+                </>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="flex items-end gap-1 mt-2 border-t border-gray-100 pt-2">
+          <div className="flex-1">
+            <Input 
+              placeholder="Nova linguagem/idioma" 
+              className="h-7 text-xs mb-1"
+              value={newLanguage.name}
+              onChange={(e) => setNewLanguage({...newLanguage, name: e.target.value})}
+            />
+            <div className="flex gap-1">
+              <Select
+                value={newLanguage.type}
+                onValueChange={(value) => setNewLanguage({...newLanguage, type: value})}
+              >
+                <SelectTrigger className="h-6 text-xs flex-1">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="programming" className="text-xs">Programação</SelectItem>
+                  <SelectItem value="language" className="text-xs">Idioma</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select
+                value={newLanguage.level}
+                onValueChange={(value) => setNewLanguage({...newLanguage, level: value})}
+              >
+                <SelectTrigger className="h-6 text-xs flex-1">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {levels.map((level) => (
+                    <SelectItem key={level} value={level} className="text-xs">
+                      {level}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <Button 
+            size="sm" 
+            className="h-7 w-7 p-0" 
+            onClick={handleAddLanguage}
+          >
+            <Plus size={16} />
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
 const ProgressoSelos = () => {
+  const [userData, setUserData] = useState({
+    projectsCompleted: 15,
+    hackathonsWon: 2,
+    collaborations: 8
+  });
+
   const selos = [
     {
       id: 1,
       nome: "Desenvolvedor Experiente",
-      progresso: 75,
-      icon: "public/lovable-uploads/d3e05fe7-e4a5-4258-9a43-c1a878a42ddc.png",
-      color: "bg-yellow-500"
+      progresso: Math.min(100, (userData.projectsCompleted / 20) * 100),
+      icon: "/lovable-uploads/d3e05fe7-e4a5-4258-9a43-c1a878a42ddc.png",
+      requirement: "20 projetos",
+      current: `${userData.projectsCompleted} projetos`
     },
     {
       id: 2,
       nome: "Mestre dos Hackathons",
-      progresso: 45,
+      progresso: Math.min(100, (userData.hackathonsWon / 5) * 100),
       icon: "https://via.placeholder.com/40",
-      color: "bg-blue-500"
+      requirement: "5 hackathons",
+      current: `${userData.hackathonsWon} hackathons`
     },
     {
       id: 3,
       nome: "Colaborador Elite",
-      progresso: 30,
+      progresso: Math.min(100, (userData.collaborations / 30) * 100),
       icon: "https://via.placeholder.com/40",
-      color: "bg-green-500"
+      requirement: "30 colaborações",
+      current: `${userData.collaborations} colaborações`
     }
   ];
 
@@ -52,15 +297,21 @@ const ProgressoSelos = () => {
         <div className="space-y-4">
           {selos.map((selo) => (
             <div key={selo.id} className="flex items-center space-x-3">
-              <div className={`h-8 w-8 rounded-full ${selo.color} flex items-center justify-center text-white overflow-hidden`}>
+              <div className={`h-8 w-8 rounded-full flex items-center justify-center text-white overflow-hidden`}>
                 <img src={selo.icon} alt={selo.nome} className="h-full w-full object-cover" />
               </div>
               <div className="flex-1">
                 <div className="flex justify-between mb-1">
                   <p className="text-sm font-medium">{selo.nome}</p>
-                  <span className="text-xs text-gray-500">{selo.progresso}%</span>
+                  <span className="text-xs text-gray-500">{selo.progresso.toFixed(0)}% ({selo.current})</span>
                 </div>
-                <Progress value={selo.progresso} className="h-2" />
+                <Progress value={selo.progresso} className="h-2 bg-gray-100">
+                  <div 
+                    className="h-full bg-orange-500" 
+                    style={{ width: `${selo.progresso}%` }}
+                  />
+                </Progress>
+                <p className="text-xs text-gray-400 mt-1">Meta: {selo.requirement}</p>
               </div>
             </div>
           ))}
@@ -70,8 +321,26 @@ const ProgressoSelos = () => {
   );
 };
 
-// Componente da barra lateral (Sidebar)
 const Sidebar = () => {
+  const handleNavigate = (path) => {
+    window.location.href = path;
+  };
+  
+  const sidebarItems = [
+    { icon: <Building size={16} className="text-gray-700" />, text: "Função", path: "/funcao" },
+    { icon: <Github size={16} className="text-gray-700" />, text: "Github", path: "/github" },
+    { icon: <Linkedin size={16} className="text-gray-700" />, text: "Linkedin", path: "/linkedin" },
+    { icon: <Link2 size={16} className="text-gray-700" />, text: "Link", path: "/link" },
+    { icon: <Home size={16} className="text-gray-700" />, text: "Página Inicial", path: "/" },
+    { icon: <Bell size={16} className="text-gray-700" />, text: "Notificações", path: "/notificacoes" },
+    { icon: <MessageSquare size={16} className="text-gray-700" />, text: "Mensagens", path: "/mensagens" },
+    { icon: <img src="/lovable-uploads/44f613b9-3eea-42dd-a2c1-3cf64b70fa25.png" alt="Hackathon" className="h-4 w-4" />, text: "Hackathons", path: "/hackathons" },
+    { icon: <FileText size={16} className="text-gray-700" />, text: "Projetos", path: "/projetos" },
+    { icon: <Users size={16} className="text-gray-700" />, text: "Equipes", path: "/equipes" },
+    { icon: <User size={16} className="text-gray-700" />, text: "Perfil", path: "/usuario" },
+    { icon: <Settings size={16} className="text-gray-700" />, text: "Configurações", path: "/configuracoes" },
+  ];
+
   return (
     <div className="bg-gradient-to-b from-[#D3E4FD] to-[#E5DEFF] min-h-screen w-64 flex-shrink-0 flex flex-col py-4 hidden md:flex">
       <div className="px-4 py-2 flex flex-col items-center">
@@ -83,61 +352,36 @@ const Sidebar = () => {
       
       <nav className="mt-6 flex-grow px-4">
         <ul className="space-y-3">
-          <li className="flex items-center space-x-3 text-gray-700">
-            <Building size={16} className="text-gray-700" />
-            <span className="text-sm">Função</span>
-          </li>
-          <li className="flex items-center space-x-3 text-gray-700">
-            <Github size={16} className="text-gray-700" />
-            <span className="text-sm">Github</span>
-          </li>
-          <li className="flex items-center space-x-3 text-gray-700">
-            <Linkedin size={16} className="text-gray-700" />
-            <span className="text-sm">Linkedin</span>
-          </li>
-          <li className="flex items-center space-x-3 text-gray-700">
-            <Link2 size={16} className="text-gray-700" />
-            <span className="text-sm">Link</span>
-          </li>
+          {sidebarItems.slice(0, 4).map((item, index) => (
+            <li 
+              key={index} 
+              className="flex items-center space-x-3 text-gray-700 cursor-pointer hover:bg-blue-100 rounded-md p-1"
+              onClick={() => handleNavigate(item.path)}
+            >
+              {item.icon}
+              <span className="text-sm">{item.text}</span>
+            </li>
+          ))}
           
           <li className="my-4 flex justify-center">
-            <Button className="bg-blue-400 hover:bg-blue-500 rounded-full text-white text-xs py-1 px-5">
+            <Button 
+              className="bg-blue-400 hover:bg-blue-500 rounded-full text-white text-xs py-1 px-5"
+              onClick={() => handleNavigate("/editar-perfil")}
+            >
               Editar Perfil
             </Button>
           </li>
           
-          <li className="flex items-center space-x-3 text-gray-700">
-            <Home size={16} className="text-gray-700" />
-            <span className="text-sm">Página Inicial</span>
-          </li>
-          <li className="flex items-center space-x-3 text-gray-700">
-            <Bell size={16} className="text-gray-700" />
-            <span className="text-sm">Notificações</span>
-          </li>
-          <li className="flex items-center space-x-3 text-gray-700">
-            <MessageSquare size={16} className="text-gray-700" />
-            <span className="text-sm">Mensagens</span>
-          </li>
-          <li className="flex items-center space-x-3 text-gray-700">
-            <img src="/lovable-uploads/44f613b9-3eea-42dd-a2c1-3cf64b70fa25.png" alt="Hackathon" className="h-4 w-4" />
-            <span className="text-sm">Hackathons</span>
-          </li>
-          <li className="flex items-center space-x-3 text-gray-700">
-            <FileText size={16} className="text-gray-700" />
-            <span className="text-sm">Projetos</span>
-          </li>
-          <li className="flex items-center space-x-3 text-gray-700">
-            <Users size={16} className="text-gray-700" />
-            <span className="text-sm">Equipes</span>
-          </li>
-          <li className="flex items-center space-x-3 text-gray-700">
-            <User size={16} className="text-gray-700" />
-            <span className="text-sm">Perfil</span>
-          </li>
-          <li className="flex items-center space-x-3 text-gray-700">
-            <Settings size={16} className="text-gray-700" />
-            <span className="text-sm">Configurações</span>
-          </li>
+          {sidebarItems.slice(4).map((item, index) => (
+            <li 
+              key={index} 
+              className="flex items-center space-x-3 text-gray-700 cursor-pointer hover:bg-blue-100 rounded-md p-1"
+              onClick={() => handleNavigate(item.path)}
+            >
+              {item.icon}
+              <span className="text-sm">{item.text}</span>
+            </li>
+          ))}
           
           <li className="pt-3">
             <Separator className="bg-gray-300" />
@@ -162,7 +406,6 @@ const Sidebar = () => {
   );
 };
 
-// Componente da barra de navegação (Navbar)
 const Navbar = () => {
   return (
     <header className="bg-white border-b border-gray-200 py-2 px-4">
@@ -190,7 +433,6 @@ const Navbar = () => {
   );
 };
 
-// Componente do rodapé (Footer)
 const Footer = () => {
   return (
     <footer className="bg-gray-50 py-8 border-t border-gray-200">
@@ -255,76 +497,11 @@ const Footer = () => {
   );
 };
 
-// Componente de Linguagens (condensado)
-const Linguagens = () => {
-  return (
-    <Card className="w-full bg-white rounded-lg border border-gray-200 mb-4">
-      <CardContent className="p-3">
-        <h2 className="text-base font-medium text-gray-800 mb-2 pb-1 border-b border-gray-200">Linguagens</h2>
-        
-        <div className="grid grid-cols-3 gap-2">
-          <div className="flex items-center space-x-2">
-            <div className="h-7 w-7 rounded-full bg-blue-500 flex items-center justify-center text-white">
-              <Code size={14} />
-            </div>
-            <div>
-              <p className="font-medium text-xs">JavaScript</p>
-              <p className="text-xs text-gray-500">Avançado</p>
-            </div>
-          </div>
-          
-          <div className="flex items-center space-x-2">
-            <div className="h-7 w-7 rounded-full bg-green-500 flex items-center justify-center text-white">
-              <Code size={14} />
-            </div>
-            <div>
-              <p className="font-medium text-xs">Python</p>
-              <p className="text-xs text-gray-500">Intermediário</p>
-            </div>
-          </div>
-          
-          <div className="flex items-center space-x-2">
-            <div className="h-7 w-7 rounded-full bg-yellow-500 flex items-center justify-center text-white">
-              <Code size={14} />
-            </div>
-            <div>
-              <p className="font-medium text-xs">HTML/CSS</p>
-              <p className="text-xs text-gray-500">Avançado</p>
-            </div>
-          </div>
-          
-          <div className="flex items-center space-x-2">
-            <div className="h-7 w-7 rounded-full bg-red-500 flex items-center justify-center text-white">
-              <Globe size={14} />
-            </div>
-            <div>
-              <p className="font-medium text-xs">Inglês</p>
-              <p className="text-xs text-gray-500">Fluente</p>
-            </div>
-          </div>
-          
-          <div className="flex items-center space-x-2">
-            <div className="h-7 w-7 rounded-full bg-purple-500 flex items-center justify-center text-white">
-              <Globe size={14} />
-            </div>
-            <div>
-              <p className="font-medium text-xs">Espanhol</p>
-              <p className="text-xs text-gray-500">Intermediário</p>
-            </div>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  );
-};
-
-// Componente principal de Projetos
 const Projetos = () => {
   const isMobile = useIsMobile();
   
-  const categorias = ["Todos", "Design", "Desenvolvimento", "Marketing", "Gestão"];
+  const categorias = ["Todos", "Design", "Dev", "Marketing", "Gestão"];
   
-  // Array de projetos com estrutura consistente para manter a proporção
   const projetos = [
     {
       id: 1,
@@ -337,7 +514,7 @@ const Projetos = () => {
       id: 2,
       titulo: "Projeto 2",
       imagem: "https://via.placeholder.com/300x200",
-      categoria: "Desenvolvimento",
+      categoria: "Dev",
       desc: "Descrição do projeto 2"
     },
     {
@@ -365,7 +542,7 @@ const Projetos = () => {
       id: 6,
       titulo: "Projeto 6",
       imagem: "https://via.placeholder.com/300x200",
-      categoria: "Desenvolvimento",
+      categoria: "Dev",
       desc: "Descrição do projeto 6"
     }
   ];
@@ -375,7 +552,6 @@ const Projetos = () => {
       <CardContent className="p-6">
         <h2 className="text-lg font-medium text-gray-800 mb-4 pb-2 border-b border-gray-200">Projetos</h2>
         
-        {/* Barra de pesquisa */}
         <div className="relative mb-6">
           <input 
             type="search" 
@@ -387,7 +563,6 @@ const Projetos = () => {
           </button>
         </div>
         
-        {/* Categorias */}
         <div className="mb-8">
           <Carousel className="w-full">
             <CarouselContent className="py-2">
@@ -404,7 +579,6 @@ const Projetos = () => {
           </Carousel>
         </div>
         
-        {/* Projetos destacados */}
         <div className="mb-8">
           <h3 className="text-md font-medium text-gray-700 mb-4">Projetos Destacados</h3>
           
@@ -430,7 +604,6 @@ const Projetos = () => {
           </Carousel>
         </div>
         
-        {/* Hackathons */}
         <div className="mb-8">
           <h3 className="text-md font-medium text-gray-700 mb-4">Hackathons</h3>
           
@@ -456,7 +629,6 @@ const Projetos = () => {
           </Carousel>
         </div>
         
-        {/* Grupos */}
         <div>
           <h3 className="text-md font-medium text-gray-700 mb-4">Grupos</h3>
           
@@ -486,7 +658,6 @@ const Projetos = () => {
   );
 };
 
-// Componente do chat estilo LinkedIn
 const LinkedInChat = () => {
   const { toast } = useToast();
   const [isOpen, setIsOpen] = useState(false);
@@ -547,7 +718,7 @@ const LinkedInChat = () => {
         <PopoverTrigger asChild>
           <Button 
             variant="outline" 
-            className={`rounded-md p-3 shadow-lg border border-gray-300 ${isOpen ? 'bg-blue-100' : 'bg-white'} hover:bg-blue-50`}
+            className={`w-60 min-w-60 rounded-md p-3 shadow-lg border border-gray-300 ${isOpen ? 'bg-blue-100' : 'bg-white'} hover:bg-blue-50`}
           >
             <div className="flex items-center space-x-2">
               <Avatar className="h-8 w-8 border border-gray-300">
@@ -567,7 +738,6 @@ const LinkedInChat = () => {
           className="p-0 w-80 h-[400px] flex flex-col rounded-t-lg shadow-xl border-gray-300"
           sideOffset={0}
         >
-          {/* Header */}
           <div className="border-b border-gray-200 p-3 flex justify-between items-center bg-gray-50">
             <div className="flex items-center space-x-2">
               <h3 className="font-medium text-gray-900">Mensagens</h3>
@@ -582,7 +752,6 @@ const LinkedInChat = () => {
             </div>
           </div>
           
-          {/* Search */}
           <div className="p-2 border-b border-gray-200">
             <div className="relative">
               <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
@@ -608,7 +777,6 @@ const LinkedInChat = () => {
             </div>
           </div>
           
-          {/* Contact List */}
           <div className="flex-1 overflow-y-auto">
             {contacts.map((contact) => (
               <div 
@@ -635,7 +803,6 @@ const LinkedInChat = () => {
             ))}
           </div>
           
-          {/* Message Input */}
           <div className="p-2 border-t border-gray-200 bg-white">
             <div className="flex items-center">
               <Input 
@@ -661,7 +828,6 @@ const LinkedInChat = () => {
   );
 };
 
-// Componente da página principal do Usuário
 const Usuario = () => {
   return (
     <div className="flex flex-col min-h-screen">
