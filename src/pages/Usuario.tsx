@@ -8,7 +8,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Search, User, Settings, Bell, Home, MessageSquare, Users, FileText, Building, Github, Linkedin, Link2 } from "lucide-react";
+import { Search, User, Settings, Bell, Home, MessageSquare, Users, FileText, Building, Github, Linkedin, Link2, Code, Globe, MoreHorizontal } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -198,6 +198,140 @@ const Footer = () => {
   );
 };
 
+// Componente de Linguagens
+const Linguagens = () => {
+  return (
+    <Card className="w-full bg-white rounded-lg border border-gray-200 mb-4">
+      <CardContent className="p-6">
+        <h2 className="text-lg font-medium text-gray-800 mb-4 pb-2 border-b border-gray-200">Linguagens</h2>
+        
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="flex items-center space-x-3">
+            <div className="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center text-white">
+              <Code size={20} />
+            </div>
+            <div>
+              <p className="font-medium">JavaScript</p>
+              <p className="text-xs text-gray-500">Avançado</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center space-x-3">
+            <div className="h-10 w-10 rounded-full bg-green-500 flex items-center justify-center text-white">
+              <Code size={20} />
+            </div>
+            <div>
+              <p className="font-medium">Python</p>
+              <p className="text-xs text-gray-500">Intermediário</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center space-x-3">
+            <div className="h-10 w-10 rounded-full bg-yellow-500 flex items-center justify-center text-white">
+              <Code size={20} />
+            </div>
+            <div>
+              <p className="font-medium">HTML/CSS</p>
+              <p className="text-xs text-gray-500">Avançado</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center space-x-3">
+            <div className="h-10 w-10 rounded-full bg-red-500 flex items-center justify-center text-white">
+              <Globe size={20} />
+            </div>
+            <div>
+              <p className="font-medium">Inglês</p>
+              <p className="text-xs text-gray-500">Fluente</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center space-x-3">
+            <div className="h-10 w-10 rounded-full bg-purple-500 flex items-center justify-center text-white">
+              <Globe size={20} />
+            </div>
+            <div>
+              <p className="font-medium">Espanhol</p>
+              <p className="text-xs text-gray-500">Intermediário</p>
+            </div>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
+// Componente de Mensagens estilo LinkedIn
+const Mensagens = () => {
+  const mensagens = [
+    {
+      id: 1,
+      nome: "Ana Silva",
+      avatar: "https://via.placeholder.com/40",
+      mensagem: "Olá! Vi seu projeto de UI/UX e adorei o trabalho. Podemos conversar?",
+      tempo: "1h atrás",
+      lida: false
+    },
+    {
+      id: 2,
+      nome: "Carlos Oliveira",
+      avatar: "https://via.placeholder.com/40",
+      mensagem: "Estou montando uma equipe para o próximo hackathon. Tem interesse?",
+      tempo: "3h atrás",
+      lida: true
+    },
+    {
+      id: 3,
+      nome: "Maria Santos",
+      avatar: "https://via.placeholder.com/40",
+      mensagem: "Os arquivos do projeto foram enviados. Poderia dar uma olhada quando tiver um tempo?",
+      tempo: "1d atrás",
+      lida: true
+    }
+  ];
+
+  return (
+    <Card className="w-full bg-white rounded-lg border border-gray-200 mb-4">
+      <CardContent className="p-6">
+        <div className="flex justify-between items-center mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-lg font-medium text-gray-800">Mensagens</h2>
+          <div className="flex space-x-2">
+            <Button variant="ghost" size="sm" className="text-blue-500 hover:text-blue-700">
+              Ver todas
+            </Button>
+            <Button variant="ghost" size="sm" className="text-gray-500">
+              <MoreHorizontal size={18} />
+            </Button>
+          </div>
+        </div>
+        
+        <div className="space-y-4">
+          {mensagens.map((msg) => (
+            <div key={msg.id} className={`flex items-start space-x-3 p-3 rounded-lg ${msg.lida ? 'bg-white' : 'bg-blue-50'}`}>
+              <Avatar className="h-10 w-10">
+                <img src={msg.avatar} alt={msg.nome} />
+              </Avatar>
+              <div className="flex-1">
+                <div className="flex justify-between">
+                  <h4 className={`font-medium ${msg.lida ? 'text-gray-700' : 'text-gray-900'}`}>{msg.nome}</h4>
+                  <span className="text-xs text-gray-500">{msg.tempo}</span>
+                </div>
+                <p className={`text-sm ${msg.lida ? 'text-gray-500' : 'text-gray-800'}`}>{msg.mensagem}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div className="mt-4 flex justify-center">
+          <Button className="bg-blue-500 hover:bg-blue-600 text-white rounded-full text-sm w-full">
+            <MessageSquare size={16} className="mr-2" /> Nova mensagem
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
 // Componente principal de Projetos
 const Projetos = () => {
   const isMobile = useIsMobile();
@@ -366,50 +500,6 @@ const Projetos = () => {
   );
 };
 
-// Componente de Perfil do Usuário
-const PerfilUsuario = () => {
-  return (
-    <Card className="bg-white rounded-lg w-full md:w-64 border border-gray-200 h-full">
-      <CardContent className="p-4">
-        <div className="flex justify-center mb-4">
-          <Avatar className="h-20 w-20 bg-gray-200 border-2 border-blue-500">
-            <User size={32} />
-          </Avatar>
-        </div>
-        
-        <div className="text-center mb-4">
-          <h3 className="font-medium text-lg">João Silva</h3>
-          <p className="text-gray-600 text-sm">@joaosilva</p>
-        </div>
-        
-        <div className="space-y-3">
-          <h4 className="font-medium text-gray-700 text-sm">Contatos recentes</h4>
-          <ul className="space-y-2">
-            <li className="flex items-center space-x-2">
-              <Avatar className="h-8 w-8 bg-gray-200">
-                <User size={16} />
-              </Avatar>
-              <span className="text-sm">Maria Santos</span>
-            </li>
-            <li className="flex items-center space-x-2">
-              <Avatar className="h-8 w-8 bg-gray-200">
-                <User size={16} />
-              </Avatar>
-              <span className="text-sm">Carlos Oliveira</span>
-            </li>
-            <li className="flex items-center space-x-2">
-              <Avatar className="h-8 w-8 bg-gray-200">
-                <User size={16} />
-              </Avatar>
-              <span className="text-sm">Ana Costa</span>
-            </li>
-          </ul>
-        </div>
-      </CardContent>
-    </Card>
-  );
-};
-
 // Componente da página principal do Usuário
 const Usuario = () => {
   const isMobile = useIsMobile();
@@ -423,13 +513,10 @@ const Usuario = () => {
         
         <div className="flex-grow bg-gray-50 overflow-y-auto">
           <div className="container mx-auto py-4 px-4">
-            <div className="flex flex-col md:flex-row gap-4">
-              <div className="w-full md:w-auto h-full">
-                <PerfilUsuario />
-              </div>
-              <div className="w-full">
-                <Projetos />
-              </div>
+            <div className="flex flex-col gap-4">
+              <Linguagens />
+              <Mensagens />
+              <Projetos />
             </div>
           </div>
         </div>
