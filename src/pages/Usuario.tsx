@@ -1,5 +1,5 @@
-import React from "react";
-import { Avatar } from "@/components/ui/avatar";
+import React, { useState } from "react";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { 
   Carousel,
   CarouselContent,
@@ -8,10 +8,13 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Search, User, Settings, Bell, Home, MessageSquare, Users, FileText, Building, Github, Linkedin, Link2, Code, Globe, MoreHorizontal } from "lucide-react";
+import { Search, User, Settings, Bell, Home, MessageSquare, Users, FileText, Building, Github, Linkedin, Link2, Code, Globe, MoreHorizontal, X, Paperclip, Send } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { Input } from "@/components/ui/input";
+import { Popover, PopoverTrigger, PopoverContent, ChatPopoverContent } from "@/components/ui/popover";
+import { useToast } from "@/hooks/use-toast";
 
 // Componente da barra lateral (Sidebar)
 const Sidebar = () => {
@@ -198,134 +201,63 @@ const Footer = () => {
   );
 };
 
-// Componente de Linguagens
+// Componente de Linguagens (condensado)
 const Linguagens = () => {
   return (
     <Card className="w-full bg-white rounded-lg border border-gray-200 mb-4">
-      <CardContent className="p-6">
-        <h2 className="text-lg font-medium text-gray-800 mb-4 pb-2 border-b border-gray-200">Linguagens</h2>
+      <CardContent className="p-4">
+        <h2 className="text-base font-medium text-gray-800 mb-3 pb-1 border-b border-gray-200">Linguagens</h2>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          <div className="flex items-center space-x-3">
-            <div className="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center text-white">
-              <Code size={20} />
+        <div className="grid grid-cols-3 gap-3">
+          <div className="flex items-center space-x-2">
+            <div className="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center text-white">
+              <Code size={16} />
             </div>
             <div>
-              <p className="font-medium">JavaScript</p>
+              <p className="font-medium text-sm">JavaScript</p>
               <p className="text-xs text-gray-500">Avançado</p>
             </div>
           </div>
           
-          <div className="flex items-center space-x-3">
-            <div className="h-10 w-10 rounded-full bg-green-500 flex items-center justify-center text-white">
-              <Code size={20} />
+          <div className="flex items-center space-x-2">
+            <div className="h-8 w-8 rounded-full bg-green-500 flex items-center justify-center text-white">
+              <Code size={16} />
             </div>
             <div>
-              <p className="font-medium">Python</p>
+              <p className="font-medium text-sm">Python</p>
               <p className="text-xs text-gray-500">Intermediário</p>
             </div>
           </div>
           
-          <div className="flex items-center space-x-3">
-            <div className="h-10 w-10 rounded-full bg-yellow-500 flex items-center justify-center text-white">
-              <Code size={20} />
+          <div className="flex items-center space-x-2">
+            <div className="h-8 w-8 rounded-full bg-yellow-500 flex items-center justify-center text-white">
+              <Code size={16} />
             </div>
             <div>
-              <p className="font-medium">HTML/CSS</p>
+              <p className="font-medium text-sm">HTML/CSS</p>
               <p className="text-xs text-gray-500">Avançado</p>
             </div>
           </div>
           
-          <div className="flex items-center space-x-3">
-            <div className="h-10 w-10 rounded-full bg-red-500 flex items-center justify-center text-white">
-              <Globe size={20} />
+          <div className="flex items-center space-x-2">
+            <div className="h-8 w-8 rounded-full bg-red-500 flex items-center justify-center text-white">
+              <Globe size={16} />
             </div>
             <div>
-              <p className="font-medium">Inglês</p>
+              <p className="font-medium text-sm">Inglês</p>
               <p className="text-xs text-gray-500">Fluente</p>
             </div>
           </div>
           
-          <div className="flex items-center space-x-3">
-            <div className="h-10 w-10 rounded-full bg-purple-500 flex items-center justify-center text-white">
-              <Globe size={20} />
+          <div className="flex items-center space-x-2">
+            <div className="h-8 w-8 rounded-full bg-purple-500 flex items-center justify-center text-white">
+              <Globe size={16} />
             </div>
             <div>
-              <p className="font-medium">Espanhol</p>
+              <p className="font-medium text-sm">Espanhol</p>
               <p className="text-xs text-gray-500">Intermediário</p>
             </div>
           </div>
-        </div>
-      </CardContent>
-    </Card>
-  );
-};
-
-// Componente de Mensagens estilo LinkedIn
-const Mensagens = () => {
-  const mensagens = [
-    {
-      id: 1,
-      nome: "Ana Silva",
-      avatar: "https://via.placeholder.com/40",
-      mensagem: "Olá! Vi seu projeto de UI/UX e adorei o trabalho. Podemos conversar?",
-      tempo: "1h atrás",
-      lida: false
-    },
-    {
-      id: 2,
-      nome: "Carlos Oliveira",
-      avatar: "https://via.placeholder.com/40",
-      mensagem: "Estou montando uma equipe para o próximo hackathon. Tem interesse?",
-      tempo: "3h atrás",
-      lida: true
-    },
-    {
-      id: 3,
-      nome: "Maria Santos",
-      avatar: "https://via.placeholder.com/40",
-      mensagem: "Os arquivos do projeto foram enviados. Poderia dar uma olhada quando tiver um tempo?",
-      tempo: "1d atrás",
-      lida: true
-    }
-  ];
-
-  return (
-    <Card className="w-full bg-white rounded-lg border border-gray-200 mb-4">
-      <CardContent className="p-6">
-        <div className="flex justify-between items-center mb-4 pb-2 border-b border-gray-200">
-          <h2 className="text-lg font-medium text-gray-800">Mensagens</h2>
-          <div className="flex space-x-2">
-            <Button variant="ghost" size="sm" className="text-blue-500 hover:text-blue-700">
-              Ver todas
-            </Button>
-            <Button variant="ghost" size="sm" className="text-gray-500">
-              <MoreHorizontal size={18} />
-            </Button>
-          </div>
-        </div>
-        
-        <div className="space-y-4">
-          {mensagens.map((msg) => (
-            <div key={msg.id} className={`flex items-start space-x-3 p-3 rounded-lg ${msg.lida ? 'bg-white' : 'bg-blue-50'}`}>
-              <Avatar className="h-10 w-10">
-                <img src={msg.avatar} alt={msg.nome} />
-              </Avatar>
-              <div className="flex-1">
-                <div className="flex justify-between">
-                  <h4 className={`font-medium ${msg.lida ? 'text-gray-700' : 'text-gray-900'}`}>{msg.nome}</h4>
-                  <span className="text-xs text-gray-500">{msg.tempo}</span>
-                </div>
-                <p className={`text-sm ${msg.lida ? 'text-gray-500' : 'text-gray-800'}`}>{msg.mensagem}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-        
-        <div className="mt-4 flex justify-center">
-          <Button className="bg-blue-500 hover:bg-blue-600 text-white rounded-full text-sm w-full">
-            <MessageSquare size={16} className="mr-2" /> Nova mensagem
-          </Button>
         </div>
       </CardContent>
     </Card>
@@ -500,10 +432,183 @@ const Projetos = () => {
   );
 };
 
+// Componente do chat estilo LinkedIn
+const LinkedInChat = () => {
+  const { toast } = useToast();
+  const [isOpen, setIsOpen] = useState(false);
+  const [message, setMessage] = useState("");
+  
+  const contacts = [
+    {
+      id: 1,
+      name: "Ana Silva",
+      avatar: "https://via.placeholder.com/40",
+      lastMessage: "Olá! Vi seu projeto de UI/UX e adorei o trabalho.",
+      time: "11 de abr.",
+      online: true,
+      unread: true
+    },
+    {
+      id: 2,
+      name: "Isabella Furbino",
+      avatar: "https://via.placeholder.com/40",
+      lastMessage: "Você tem problemas com Controle de Versão?",
+      time: "7 de abr.",
+      online: false,
+      unread: false
+    },
+    {
+      id: 3,
+      name: "Fabrício Cantieri",
+      avatar: "https://via.placeholder.com/40",
+      lastMessage: "Seja bem vinda Jéssica, tudo bem?",
+      time: "6 de abr.",
+      online: true,
+      unread: false
+    },
+    {
+      id: 4,
+      name: "Natan Tomé",
+      avatar: "https://via.placeholder.com/40",
+      lastMessage: "Você: Oi, Natan! Tudo certinho? Que massa!!!",
+      time: "31 de mar.",
+      online: true,
+      unread: false
+    }
+  ];
+
+  const handleSend = () => {
+    if (message.trim()) {
+      toast({
+        title: "Mensagem enviada",
+        description: "Sua mensagem foi enviada com sucesso!",
+      });
+      setMessage("");
+    }
+  };
+
+  return (
+    <div className="fixed bottom-4 right-4 z-50">
+      <Popover open={isOpen} onOpenChange={setIsOpen}>
+        <PopoverTrigger asChild>
+          <Button 
+            variant="outline" 
+            className={`rounded-full p-3 shadow-lg border border-gray-300 ${isOpen ? 'bg-blue-100' : 'bg-white'} hover:bg-blue-50`}
+          >
+            <div className="flex items-center space-x-2">
+              <Avatar className="h-8 w-8 border border-gray-300">
+                <AvatarImage src="/lovable-uploads/63498272-71ed-42ba-8c2f-2666d4afa1fd.png" alt="Profile" />
+                <AvatarFallback>U</AvatarFallback>
+              </Avatar>
+              {!isOpen && (
+                <>
+                  <span className="font-medium text-gray-700">Mensagens</span>
+                  <div className="h-2 w-2 bg-green-500 rounded-full absolute top-1 right-1"></div>
+                </>
+              )}
+            </div>
+          </Button>
+        </PopoverTrigger>
+        <ChatPopoverContent 
+          className="p-0 w-80 h-[400px] flex flex-col rounded-t-lg shadow-xl border-gray-300"
+          sideOffset={0}
+        >
+          {/* Header */}
+          <div className="border-b border-gray-200 p-3 flex justify-between items-center bg-gray-50">
+            <div className="flex items-center space-x-2">
+              <h3 className="font-medium text-gray-900">Mensagens</h3>
+            </div>
+            <div className="flex space-x-2">
+              <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full">
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+              <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full" onClick={() => setIsOpen(false)}>
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+          
+          {/* Search */}
+          <div className="p-2 border-b border-gray-200">
+            <div className="relative">
+              <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
+              <Input 
+                placeholder="Pesquisar mensagens" 
+                className="pl-8 py-1 h-8 text-sm"
+              />
+            </div>
+            
+            <div className="flex mt-2">
+              <Button 
+                variant="ghost"
+                className="flex-1 py-1 h-8 text-sm border-b-2 border-blue-500 text-blue-700 rounded-none"
+              >
+                Prioritárias
+              </Button>
+              <Button 
+                variant="ghost"
+                className="flex-1 py-1 h-8 text-sm text-gray-500 rounded-none"
+              >
+                Outras
+              </Button>
+            </div>
+          </div>
+          
+          {/* Contact List */}
+          <div className="flex-1 overflow-y-auto">
+            {contacts.map((contact) => (
+              <div 
+                key={contact.id}
+                className={`flex items-center p-2 hover:bg-gray-100 cursor-pointer border-b border-gray-200 ${contact.unread ? 'bg-blue-50' : ''}`}
+              >
+                <div className="relative">
+                  <Avatar className="h-10 w-10">
+                    <AvatarImage src={contact.avatar} alt={contact.name} />
+                    <AvatarFallback>{contact.name.charAt(0)}</AvatarFallback>
+                  </Avatar>
+                  {contact.online && (
+                    <div className="absolute bottom-0 right-0 h-2.5 w-2.5 bg-green-500 rounded-full border border-white"></div>
+                  )}
+                </div>
+                <div className="ml-3 flex-1 min-w-0">
+                  <div className="flex justify-between">
+                    <p className={`font-medium text-sm truncate ${contact.unread ? 'text-black' : 'text-gray-700'}`}>{contact.name}</p>
+                    <span className="text-xs text-gray-500">{contact.time}</span>
+                  </div>
+                  <p className={`text-xs truncate ${contact.unread ? 'text-gray-800' : 'text-gray-500'}`}>{contact.lastMessage}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Message Input */}
+          <div className="p-2 border-t border-gray-200 bg-white">
+            <div className="flex items-center">
+              <Input 
+                placeholder="Escreva sua mensagem..."
+                className="text-sm focus-visible:ring-0"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSend()}
+              />
+              <div className="flex ml-2">
+                <Button variant="ghost" size="icon" className="h-8 w-8">
+                  <Paperclip className="h-4 w-4 text-gray-500" />
+                </Button>
+                <Button variant="ghost" size="icon" className="h-8 w-8" onClick={handleSend}>
+                  <Send className="h-4 w-4 text-blue-500" />
+                </Button>
+              </div>
+            </div>
+          </div>
+        </ChatPopoverContent>
+      </Popover>
+    </div>
+  );
+};
+
 // Componente da página principal do Usuário
 const Usuario = () => {
-  const isMobile = useIsMobile();
-  
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
@@ -515,7 +620,6 @@ const Usuario = () => {
           <div className="container mx-auto py-4 px-4">
             <div className="flex flex-col gap-4">
               <Linguagens />
-              <Mensagens />
               <Projetos />
             </div>
           </div>
@@ -523,6 +627,7 @@ const Usuario = () => {
       </div>
       
       <Footer />
+      <LinkedInChat />
     </div>
   );
 };
