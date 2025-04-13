@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Avatar } from "@/components/ui/avatar";
 import { 
@@ -12,6 +11,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { Search, User, Settings, Bell, Home, MessageSquare, Users, FileText, Building, Github, Linkedin, Link2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 
 // Componente da barra lateral (Sidebar)
 const Sidebar = () => {
@@ -81,20 +81,26 @@ const Sidebar = () => {
             <Settings size={16} className="text-gray-700" />
             <span className="text-sm">Configurações</span>
           </li>
+          
+          <li className="pt-3">
+            <Separator className="bg-gray-300" />
+          </li>
+          
+          <li className="pt-3">
+            <div className="flex justify-around">
+              <div className="h-10 w-10 rounded-full bg-[#F4D35E] border border-gray-400 flex items-center justify-center text-white overflow-hidden">
+                <img src="https://via.placeholder.com/40" alt="Skill 1" className="h-full w-full object-cover" />
+              </div>
+              <div className="h-10 w-10 rounded-full bg-[#50B2C0] border border-gray-400 flex items-center justify-center text-white overflow-hidden">
+                <img src="https://via.placeholder.com/40" alt="Skill 2" className="h-full w-full object-cover" />
+              </div>
+              <div className="h-10 w-10 rounded-full bg-[#EE6C4D] border border-gray-400 flex items-center justify-center text-white overflow-hidden">
+                <img src="https://via.placeholder.com/40" alt="Skill 3" className="h-full w-full object-cover" />
+              </div>
+            </div>
+          </li>
         </ul>
       </nav>
-      
-      <div className="mt-auto px-4 py-4 flex justify-around border-t border-gray-300 mx-4">
-        <div className="h-10 w-10 rounded-full bg-[#F4D35E] border border-gray-400 flex items-center justify-center text-white overflow-hidden">
-          <img src="https://via.placeholder.com/40" alt="Skill 1" className="h-full w-full object-cover" />
-        </div>
-        <div className="h-10 w-10 rounded-full bg-[#50B2C0] border border-gray-400 flex items-center justify-center text-white overflow-hidden">
-          <img src="https://via.placeholder.com/40" alt="Skill 2" className="h-full w-full object-cover" />
-        </div>
-        <div className="h-10 w-10 rounded-full bg-[#EE6C4D] border border-gray-400 flex items-center justify-center text-white overflow-hidden">
-          <img src="https://via.placeholder.com/40" alt="Skill 3" className="h-full w-full object-cover" />
-        </div>
-      </div>
     </div>
   );
 };
