@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { 
   Carousel,
   CarouselContent,
@@ -19,45 +19,51 @@ const Projetos = () => {
   const projetos = [
     {
       id: 1,
-      titulo: "Projeto 1",
-      imagem: "https://via.placeholder.com/300x200",
+      titulo: "nome:",
+      empresa: "empresa:",
+      imagem: "/lovable-uploads/f3056b72-9444-4661-8acd-eab6e0b1f442.png",
       categoria: "Design",
-      desc: "Descrição do projeto 1"
+      status: ""
     },
     {
       id: 2,
-      titulo: "Projeto 2",
-      imagem: "https://via.placeholder.com/300x200",
+      titulo: "nome:",
+      empresa: "empresa:",
+      imagem: "/lovable-uploads/f3056b72-9444-4661-8acd-eab6e0b1f442.png",
       categoria: "Dev",
-      desc: "Descrição do projeto 2"
+      status: "completo"
     },
     {
       id: 3,
-      titulo: "Projeto 3",
-      imagem: "https://via.placeholder.com/300x200",
+      titulo: "nome:",
+      empresa: "empresa:",
+      imagem: "/lovable-uploads/f3056b72-9444-4661-8acd-eab6e0b1f442.png",
       categoria: "Marketing",
-      desc: "Descrição do projeto 3"
+      status: ""
     },
     {
       id: 4,
-      titulo: "Projeto 4",
-      imagem: "https://via.placeholder.com/300x200",
+      titulo: "nome:",
+      empresa: "empresa:",
+      imagem: "/lovable-uploads/f3056b72-9444-4661-8acd-eab6e0b1f442.png",
       categoria: "Design",
-      desc: "Descrição do projeto 4"
+      status: "finalizado"
     },
     {
       id: 5,
-      titulo: "Projeto 5",
-      imagem: "https://via.placeholder.com/300x200",
+      titulo: "nome:",
+      empresa: "empresa:",
+      imagem: "/lovable-uploads/f3056b72-9444-4661-8acd-eab6e0b1f442.png",
       categoria: "Gestão",
-      desc: "Descrição do projeto 5"
+      status: ""
     },
     {
       id: 6,
-      titulo: "Projeto 6",
-      imagem: "https://via.placeholder.com/300x200",
+      titulo: "nome:",
+      empresa: "empresa:",
+      imagem: "/lovable-uploads/f3056b72-9444-4661-8acd-eab6e0b1f442.png",
       categoria: "Dev",
-      desc: "Descrição do projeto 6"
+      status: ""
     }
   ];
 
@@ -94,20 +100,34 @@ const Projetos = () => {
         </div>
         
         <div className="mb-8 px-4 relative">
-          <h3 className="text-md font-medium text-gray-700 mb-4">Projetos Destacados</h3>
+          <h3 className="text-md font-medium text-gray-700 mb-4">projetos</h3>
           
           <Carousel className="w-full">
             <CarouselContent>
               {projetos.slice(0, 3).map((projeto) => (
                 <CarouselItem key={projeto.id} className={isMobile ? "basis-full" : "basis-1/3"}>
-                  <div className="bg-gray-50 rounded-lg overflow-hidden border border-gray-200 h-full">
-                    <img src={projeto.imagem} alt={projeto.titulo} className="w-full h-40 object-cover" />
-                    <div className="p-4">
-                      <h4 className="font-medium">{projeto.titulo}</h4>
-                      <p className="text-sm text-gray-600 mb-4">{projeto.desc}</p>
-                      <button className="mt-2 bg-blue-600 text-white text-sm px-4 py-1 rounded-md w-full">
-                        Detalhes
-                      </button>
+                  <div className="bg-blue-300 rounded-lg overflow-hidden h-full relative">
+                    {projeto.status && (
+                      <span className="absolute top-2 right-2 bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded">
+                        {projeto.status}
+                      </span>
+                    )}
+                    <div className="flex justify-center pt-8 pb-4">
+                      <div className="w-16 h-16 rounded-full bg-yellow-300 flex items-center justify-center">
+                        <img src={projeto.imagem} alt="Ícone de lâmpada" className="w-10 h-10" />
+                      </div>
+                    </div>
+                    <div className="p-4 text-white">
+                      <p className="mb-1">{projeto.titulo}</p>
+                      <p className="mb-6">{projeto.empresa}</p>
+                      <div className="flex justify-between gap-2 mt-4">
+                        <button className="bg-white text-black text-sm px-4 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
+                          participar
+                        </button>
+                        <button className="bg-white text-black text-sm px-4 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
+                          saber +
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </CarouselItem>
@@ -119,20 +139,34 @@ const Projetos = () => {
         </div>
         
         <div className="mb-8 px-4 relative">
-          <h3 className="text-md font-medium text-gray-700 mb-4">Hackathons</h3>
+          <h3 className="text-md font-medium text-gray-700 mb-4">hackatons</h3>
           
           <Carousel className="w-full">
             <CarouselContent>
               {projetos.slice(3, 6).map((projeto) => (
                 <CarouselItem key={projeto.id} className={isMobile ? "basis-full" : "basis-1/3"}>
-                  <div className="bg-orange-50 rounded-lg overflow-hidden border border-orange-100 h-full">
-                    <img src={projeto.imagem} alt={projeto.titulo} className="w-full h-40 object-cover" />
-                    <div className="p-4">
-                      <h4 className="font-medium">{projeto.titulo}</h4>
-                      <p className="text-sm text-gray-600 mb-4">Categoria: {projeto.categoria}</p>
-                      <button className="mt-2 bg-orange-500 text-white text-sm px-4 py-1 rounded-md w-full">
-                        Participar
-                      </button>
+                  <div className="bg-blue-300 rounded-lg overflow-hidden h-full relative">
+                    {projeto.status && (
+                      <span className="absolute top-2 right-2 bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded">
+                        {projeto.status}
+                      </span>
+                    )}
+                    <div className="flex justify-center pt-8 pb-4">
+                      <div className="w-16 h-16 rounded-full bg-yellow-300 flex items-center justify-center">
+                        <img src={projeto.imagem} alt="Ícone de lâmpada" className="w-10 h-10" />
+                      </div>
+                    </div>
+                    <div className="p-4 text-white">
+                      <p className="mb-1">{projeto.titulo}</p>
+                      <p className="mb-6">{projeto.empresa}</p>
+                      <div className="flex justify-between gap-2 mt-4">
+                        <button className="bg-white text-black text-sm px-4 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
+                          participar
+                        </button>
+                        <button className="bg-white text-black text-sm px-4 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
+                          saber +
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </CarouselItem>
@@ -150,14 +184,28 @@ const Projetos = () => {
             <CarouselContent>
               {projetos.slice(0, 3).map((projeto) => (
                 <CarouselItem key={projeto.id} className={isMobile ? "basis-full" : "basis-1/3"}>
-                  <div className="bg-gray-50 rounded-lg overflow-hidden border border-gray-200 h-full">
-                    <img src={projeto.imagem} alt={projeto.titulo} className="w-full h-40 object-cover" />
-                    <div className="p-4">
-                      <h4 className="font-medium">{projeto.titulo}</h4>
-                      <p className="text-sm text-gray-600 mb-4">{projeto.desc}</p>
-                      <button className="mt-2 bg-blue-600 text-white text-sm px-4 py-1 rounded-md w-full">
-                        Entrar
-                      </button>
+                  <div className="bg-blue-300 rounded-lg overflow-hidden h-full relative">
+                    {projeto.status && (
+                      <span className="absolute top-2 right-2 bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded">
+                        {projeto.status}
+                      </span>
+                    )}
+                    <div className="flex justify-center pt-8 pb-4">
+                      <div className="w-16 h-16 rounded-full bg-yellow-300 flex items-center justify-center">
+                        <img src={projeto.imagem} alt="Ícone de lâmpada" className="w-10 h-10" />
+                      </div>
+                    </div>
+                    <div className="p-4 text-white">
+                      <p className="mb-1">{projeto.titulo}</p>
+                      <p className="mb-6">{projeto.empresa}</p>
+                      <div className="flex justify-between gap-2 mt-4">
+                        <button className="bg-white text-black text-sm px-4 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
+                          participar
+                        </button>
+                        <button className="bg-white text-black text-sm px-4 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
+                          saber +
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </CarouselItem>
