@@ -10,9 +10,11 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { ChevronLeft, ChevronRight, Lightbulb } from "lucide-react";
 
 const Projetos = () => {
   const isMobile = useIsMobile();
+  const [filtroCategoria, setFiltroCategoria] = useState("Todos");
   
   const categorias = ["Todos", "Design", "Dev", "Marketing", "Gestão"];
   
@@ -23,7 +25,7 @@ const Projetos = () => {
       empresa: "empresa:",
       imagem: "/lovable-uploads/f3056b72-9444-4661-8acd-eab6e0b1f442.png",
       categoria: "Design",
-      status: ""
+      status: "completo"
     },
     {
       id: 2,
@@ -31,7 +33,7 @@ const Projetos = () => {
       empresa: "empresa:",
       imagem: "/lovable-uploads/f3056b72-9444-4661-8acd-eab6e0b1f442.png",
       categoria: "Dev",
-      status: "completo"
+      status: ""
     },
     {
       id: 3,
@@ -40,32 +42,58 @@ const Projetos = () => {
       imagem: "/lovable-uploads/f3056b72-9444-4661-8acd-eab6e0b1f442.png",
       categoria: "Marketing",
       status: ""
-    },
+    }
+  ];
+  
+  const hackathons = [
     {
-      id: 4,
-      titulo: "nome:",
-      empresa: "empresa:",
-      imagem: "/lovable-uploads/f3056b72-9444-4661-8acd-eab6e0b1f442.png",
-      categoria: "Design",
+      id: 1,
+      titulo: "Nome do hackathon",
+      descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In fermentum ultrices sollicitudin. Nam viverra magna a molestie.",
+      imagem: "/lovable-uploads/e81e5a94-cf17-44af-9574-ce0cf0f520a7.png",
       status: "finalizado"
     },
     {
-      id: 5,
-      titulo: "nome:",
-      empresa: "empresa:",
-      imagem: "/lovable-uploads/f3056b72-9444-4661-8acd-eab6e0b1f442.png",
-      categoria: "Gestão",
+      id: 2,
+      titulo: "Nome do hackathon",
+      descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In fermentum ultrices sollicitudin. Nam viverra magna a molestie.",
+      imagem: "/lovable-uploads/e81e5a94-cf17-44af-9574-ce0cf0f520a7.png",
       status: ""
     },
     {
-      id: 6,
-      titulo: "nome:",
-      empresa: "empresa:",
-      imagem: "/lovable-uploads/f3056b72-9444-4661-8acd-eab6e0b1f442.png",
-      categoria: "Dev",
+      id: 3,
+      titulo: "Nome do hackathon",
+      descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In fermentum ultrices sollicitudin. Nam viverra magna a molestie.",
+      imagem: "/lovable-uploads/e81e5a94-cf17-44af-9574-ce0cf0f520a7.png",
       status: ""
     }
   ];
+  
+  const grupos = [
+    {
+      id: 1,
+      titulo: "",
+      imagem: "/lovable-uploads/e81e5a94-cf17-44af-9574-ce0cf0f520a7.png",
+      status: ""
+    },
+    {
+      id: 2,
+      titulo: "",
+      imagem: "/lovable-uploads/e81e5a94-cf17-44af-9574-ce0cf0f520a7.png",
+      status: ""
+    },
+    {
+      id: 3,
+      titulo: "",
+      imagem: "/lovable-uploads/e81e5a94-cf17-44af-9574-ce0cf0f520a7.png",
+      status: ""
+    }
+  ];
+
+  // Função para filtrar projetos por categoria
+  const projetosFiltrados = filtroCategoria === "Todos" 
+    ? projetos 
+    : projetos.filter(projeto => projeto.categoria === filtroCategoria);
 
   return (
     <Card className="w-full bg-white rounded-lg border border-gray-200">
@@ -88,7 +116,10 @@ const Projetos = () => {
             <CarouselContent className="py-2">
               {categorias.map((categoria, index) => (
                 <CarouselItem key={index} className={isMobile ? "basis-1/2" : "basis-1/5"}>
-                  <div className="border border-gray-300 rounded-md px-4 py-2 text-center text-gray-700 text-sm hover:bg-gray-50 cursor-pointer">
+                  <div 
+                    className={`border ${filtroCategoria === categoria ? 'border-blue-500 bg-blue-50' : 'border-gray-300'} rounded-md px-4 py-2 text-center text-gray-700 text-sm hover:bg-gray-50 cursor-pointer`}
+                    onClick={() => setFiltroCategoria(categoria)}
+                  >
                     {categoria}
                   </div>
                 </CarouselItem>
@@ -99,121 +130,136 @@ const Projetos = () => {
           </Carousel>
         </div>
         
-        <div className="mb-8 px-4 relative">
-          <h3 className="text-md font-medium text-gray-700 mb-4">projetos</h3>
+        {/* PROJETOS SECTION */}
+        <div className="mb-8">
+          <h3 className="text-md font-medium text-indigo-800 mb-4 px-4">projetos</h3>
           
-          <Carousel className="w-full">
-            <CarouselContent>
-              {projetos.slice(0, 3).map((projeto) => (
-                <CarouselItem key={projeto.id} className={isMobile ? "basis-full" : "basis-1/3"}>
-                  <div className="bg-blue-300 rounded-lg overflow-hidden h-full relative">
-                    {projeto.status && (
-                      <span className="absolute top-2 right-2 bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded">
-                        {projeto.status}
-                      </span>
-                    )}
-                    <div className="flex justify-center pt-8 pb-4">
-                      <div className="w-16 h-16 rounded-full bg-yellow-300 flex items-center justify-center">
-                        <img src={projeto.imagem} alt="Ícone de lâmpada" className="w-10 h-10" />
+          <div className="relative">
+            <Carousel className="w-full">
+              <CarouselContent>
+                {projetosFiltrados.map((projeto) => (
+                  <CarouselItem key={projeto.id} className={isMobile ? "basis-full" : "basis-1/3"}>
+                    <div className="rounded-lg overflow-hidden h-full relative border border-gray-200">
+                      {projeto.status && (
+                        <span className="absolute top-2 right-2 bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded">
+                          {projeto.status}
+                        </span>
+                      )}
+                      <div className="flex flex-col h-full">
+                        <div className="bg-blue-400 relative pt-12 pb-2">
+                          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full bg-yellow-300 flex items-center justify-center">
+                            <Lightbulb className="w-7 h-7 text-black" />
+                          </div>
+                        </div>
+                        <div className="bg-blue-400 p-4 text-white flex-grow">
+                          <p className="text-sm font-medium">{projeto.titulo}</p>
+                          <p className="text-sm mb-6">{projeto.empresa}</p>
+                          <div className="flex justify-between gap-2 mt-auto">
+                            <button className="bg-white text-black text-xs px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
+                              participar
+                            </button>
+                            <button className="bg-white text-black text-xs px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
+                              saber +
+                            </button>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div className="p-4 text-white">
-                      <p className="mb-1">{projeto.titulo}</p>
-                      <p className="mb-6">{projeto.empresa}</p>
-                      <div className="flex justify-between gap-2 mt-4">
-                        <button className="bg-white text-black text-sm px-4 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
-                          participar
-                        </button>
-                        <button className="bg-white text-black text-sm px-4 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
-                          saber +
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="-left-4" />
-            <CarouselNext className="-right-4" />
-          </Carousel>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="-left-4 flex items-center justify-center">
+                <ChevronLeft className="h-4 w-4" />
+              </CarouselPrevious>
+              <CarouselNext className="-right-4 flex items-center justify-center">
+                <ChevronRight className="h-4 w-4" />
+              </CarouselNext>
+            </Carousel>
+          </div>
         </div>
         
-        <div className="mb-8 px-4 relative">
-          <h3 className="text-md font-medium text-gray-700 mb-4">hackatons</h3>
+        {/* HACKATONS SECTION */}
+        <div className="mb-8">
+          <h3 className="text-md font-medium text-indigo-800 mb-4 px-4">hackatons</h3>
           
-          <Carousel className="w-full">
-            <CarouselContent>
-              {projetos.slice(3, 6).map((projeto) => (
-                <CarouselItem key={projeto.id} className={isMobile ? "basis-full" : "basis-1/3"}>
-                  <div className="bg-blue-300 rounded-lg overflow-hidden h-full relative">
-                    {projeto.status && (
-                      <span className="absolute top-2 right-2 bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded">
-                        {projeto.status}
-                      </span>
-                    )}
-                    <div className="flex justify-center pt-8 pb-4">
-                      <div className="w-16 h-16 rounded-full bg-yellow-300 flex items-center justify-center">
-                        <img src={projeto.imagem} alt="Ícone de lâmpada" className="w-10 h-10" />
+          <div className="relative">
+            <Carousel className="w-full">
+              <CarouselContent>
+                {hackathons.map((hackathon) => (
+                  <CarouselItem key={hackathon.id} className={isMobile ? "basis-full" : "basis-1/3"}>
+                    <div className="rounded-lg overflow-hidden h-full relative border border-gray-200">
+                      {hackathon.status && (
+                        <span className="absolute top-2 right-2 bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded">
+                          {hackathon.status}
+                        </span>
+                      )}
+                      <div className="flex flex-col h-full">
+                        <div className="bg-gray-800 p-4 text-white">
+                          <h4 className="text-sm font-medium">{hackathon.titulo}</h4>
+                          <p className="text-xs mt-2 mb-4">{hackathon.descricao}</p>
+                          <div className="flex justify-between gap-2 mt-4">
+                            <button className="bg-white text-black text-xs px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
+                              participar
+                            </button>
+                            <button className="bg-white text-black text-xs px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
+                              saber +
+                            </button>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div className="p-4 text-white">
-                      <p className="mb-1">{projeto.titulo}</p>
-                      <p className="mb-6">{projeto.empresa}</p>
-                      <div className="flex justify-between gap-2 mt-4">
-                        <button className="bg-white text-black text-sm px-4 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
-                          participar
-                        </button>
-                        <button className="bg-white text-black text-sm px-4 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
-                          saber +
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="-left-4" />
-            <CarouselNext className="-right-4" />
-          </Carousel>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="-left-4 bg-yellow-400 hover:bg-yellow-500 flex items-center justify-center">
+                <ChevronLeft className="h-4 w-4" />
+              </CarouselPrevious>
+              <CarouselNext className="-right-4 bg-orange-500 hover:bg-orange-600 flex items-center justify-center">
+                <ChevronRight className="h-4 w-4" />
+              </CarouselNext>
+            </Carousel>
+          </div>
         </div>
         
-        <div className="px-4 relative">
-          <h3 className="text-md font-medium text-gray-700 mb-4">Grupos</h3>
+        {/* GRUPOS SECTION */}
+        <div>
+          <h3 className="text-md font-medium text-indigo-800 mb-4 px-4">Grupos</h3>
           
-          <Carousel className="w-full">
-            <CarouselContent>
-              {projetos.slice(0, 3).map((projeto) => (
-                <CarouselItem key={projeto.id} className={isMobile ? "basis-full" : "basis-1/3"}>
-                  <div className="bg-blue-300 rounded-lg overflow-hidden h-full relative">
-                    {projeto.status && (
-                      <span className="absolute top-2 right-2 bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded">
-                        {projeto.status}
-                      </span>
-                    )}
-                    <div className="flex justify-center pt-8 pb-4">
-                      <div className="w-16 h-16 rounded-full bg-yellow-300 flex items-center justify-center">
-                        <img src={projeto.imagem} alt="Ícone de lâmpada" className="w-10 h-10" />
+          <div className="relative">
+            <Carousel className="w-full">
+              <CarouselContent>
+                {grupos.map((grupo) => (
+                  <CarouselItem key={grupo.id} className={isMobile ? "basis-full" : "basis-1/3"}>
+                    <div className="rounded-lg overflow-hidden h-full relative border border-gray-200">
+                      {grupo.status && (
+                        <span className="absolute top-2 right-2 bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded">
+                          {grupo.status}
+                        </span>
+                      )}
+                      <div className="flex flex-col h-full">
+                        <div className="bg-green-300 p-4 pt-24 flex-grow">
+                          <div className="flex justify-between gap-2 mt-auto">
+                            <button className="bg-white text-black text-xs px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
+                              participar
+                            </button>
+                            <button className="bg-white text-black text-xs px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
+                              saber +
+                            </button>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div className="p-4 text-white">
-                      <p className="mb-1">{projeto.titulo}</p>
-                      <p className="mb-6">{projeto.empresa}</p>
-                      <div className="flex justify-between gap-2 mt-4">
-                        <button className="bg-white text-black text-sm px-4 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
-                          participar
-                        </button>
-                        <button className="bg-white text-black text-sm px-4 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
-                          saber +
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="-left-4" />
-            <CarouselNext className="-right-4" />
-          </Carousel>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="-left-4 bg-blue-500 hover:bg-blue-600 flex items-center justify-center">
+                <ChevronLeft className="h-4 w-4" />
+              </CarouselPrevious>
+              <CarouselNext className="-right-4 bg-blue-500 hover:bg-blue-600 flex items-center justify-center">
+                <ChevronRight className="h-4 w-4" />
+              </CarouselNext>
+            </Carousel>
+          </div>
         </div>
       </CardContent>
     </Card>
