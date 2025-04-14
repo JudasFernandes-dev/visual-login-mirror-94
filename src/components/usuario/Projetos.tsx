@@ -77,7 +77,7 @@ const Projetos = () => {
           </button>
         </div>
         
-        <div className="mb-8">
+        <div className="mb-8 px-4 relative">
           <Carousel className="w-full">
             <CarouselContent className="py-2">
               {categorias.map((categoria, index) => (
@@ -88,12 +88,12 @@ const Projetos = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="left-0" />
-            <CarouselNext className="right-0" />
+            <CarouselPrevious className="-left-4" />
+            <CarouselNext className="-right-4" />
           </Carousel>
         </div>
         
-        <div className="mb-8">
+        <div className="mb-8 px-4 relative">
           <h3 className="text-md font-medium text-gray-700 mb-4">Projetos Destacados</h3>
           
           <Carousel className="w-full">
@@ -113,12 +113,12 @@ const Projetos = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="left-0" />
-            <CarouselNext className="right-0" />
+            <CarouselPrevious className="-left-4" />
+            <CarouselNext className="-right-4" />
           </Carousel>
         </div>
         
-        <div className="mb-8">
+        <div className="mb-8 px-4 relative">
           <h3 className="text-md font-medium text-gray-700 mb-4">Hackathons</h3>
           
           <Carousel className="w-full">
@@ -138,12 +138,12 @@ const Projetos = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="left-0" />
-            <CarouselNext className="right-0" />
+            <CarouselPrevious className="-left-4" />
+            <CarouselNext className="-right-4" />
           </Carousel>
         </div>
         
-        <div>
+        <div className="px-4 relative">
           <h3 className="text-md font-medium text-gray-700 mb-4">Grupos</h3>
           
           <Carousel className="w-full">
@@ -163,8 +163,8 @@ const Projetos = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="left-0" />
-            <CarouselNext className="right-0" />
+            <CarouselPrevious className="-left-4" />
+            <CarouselNext className="-right-4" />
           </Carousel>
         </div>
       </CardContent>
