@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Settings } from "lucide-react";
+import { Settings, Code, Globe } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -61,7 +61,7 @@ const Linguagens = () => {
 
   return (
     <Card className="w-full bg-white rounded-lg border border-gray-200">
-      <CardContent className="p-6">
+      <CardContent className="p-4">
         <div className="flex justify-between items-center mb-4 pb-2 border-b border-gray-200">
           <h2 className="text-lg font-medium text-gray-800">Linguagens</h2>
           
@@ -124,10 +124,12 @@ const Linguagens = () => {
           </Sheet>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-6">
           {/* Programação */}
           <div>
-            <h3 className="text-md font-medium mb-4 text-indigo-800">programação</h3>
+            <h3 className="text-md font-medium mb-4 text-indigo-800 flex items-center">
+              <Code className="mr-2 h-4 w-4" /> programação
+            </h3>
             
             <div className="mb-4">
               <div className="grid grid-cols-2 gap-2 mb-3">
@@ -167,20 +169,24 @@ const Linguagens = () => {
               
               <Button 
                 onClick={adicionarLinguagem} 
-                className="w-full mb-4"
+                className="w-full mb-3"
+                size="sm"
               >
                 Adicionar
               </Button>
             </div>
             
-            <div className="space-y-2">
+            <div className="space-y-1 max-h-32 overflow-y-auto">
               {linguagens.map(linguagem => (
                 <div 
                   key={linguagem.id} 
-                  className="flex justify-between items-center p-2 border border-gray-300 rounded"
+                  className="flex justify-between items-center p-1.5 border border-gray-300 rounded"
                 >
-                  <span>{linguagem.nome}</span>
-                  <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
+                  <span className="flex items-center">
+                    <Code className="h-4 w-4 mr-2 text-blue-500" />
+                    {linguagem.nome}
+                  </span>
+                  <span className="bg-blue-100 text-blue-800 text-xs px-2 py-0.5 rounded">
                     {linguagem.nivel}
                   </span>
                 </div>
@@ -190,7 +196,9 @@ const Linguagens = () => {
           
           {/* Idiomas */}
           <div>
-            <h3 className="text-md font-medium mb-4 text-indigo-800">idiomas</h3>
+            <h3 className="text-md font-medium mb-4 text-indigo-800 flex items-center">
+              <Globe className="mr-2 h-4 w-4" /> idiomas
+            </h3>
             
             <div className="mb-4">
               <div className="grid grid-cols-2 gap-2 mb-3">
@@ -230,20 +238,24 @@ const Linguagens = () => {
               
               <Button 
                 onClick={adicionarIdioma} 
-                className="w-full mb-4"
+                className="w-full mb-3"
+                size="sm"
               >
                 Adicionar
               </Button>
             </div>
             
-            <div className="space-y-2">
+            <div className="space-y-1 max-h-32 overflow-y-auto">
               {idiomas.map(idioma => (
                 <div 
                   key={idioma.id} 
-                  className="flex justify-between items-center p-2 border border-gray-300 rounded"
+                  className="flex justify-between items-center p-1.5 border border-gray-300 rounded"
                 >
-                  <span>{idioma.nome}</span>
-                  <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
+                  <span className="flex items-center">
+                    <Globe className="h-4 w-4 mr-2 text-green-500" />
+                    {idioma.nome}
+                  </span>
+                  <span className="bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded">
                     {idioma.nivel}
                   </span>
                 </div>

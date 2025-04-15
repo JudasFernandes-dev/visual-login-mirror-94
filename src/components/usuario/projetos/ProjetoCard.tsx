@@ -15,7 +15,7 @@ interface ProjetoCardProps {
 
 const ProjetoCard = ({ projeto }: ProjetoCardProps) => {
   return (
-    <div className="rounded-lg overflow-hidden h-full relative border border-gray-200 mx-2 w-64">
+    <div className="rounded-lg overflow-hidden h-full relative border border-gray-200 mx-2 w-56">
       {projeto.status && (
         <span className="absolute top-2 right-2 bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded">
           {projeto.status}
