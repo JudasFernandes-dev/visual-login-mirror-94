@@ -138,8 +138,8 @@ const Projetos = () => {
             <Carousel className="w-full">
               <CarouselContent>
                 {projetosFiltrados.map((projeto) => (
-                  <CarouselItem key={projeto.id} className={isMobile ? "basis-full" : "basis-1/3"}>
-                    <div className="rounded-lg overflow-hidden h-full relative border border-gray-200">
+                  <CarouselItem key={projeto.id} className={isMobile ? "basis-full" : "basis-1/4"}>
+                    <div className="rounded-lg overflow-hidden h-full relative border border-gray-200 mx-2">
                       {projeto.status && (
                         <span className="absolute top-2 right-2 bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded">
                           {projeto.status}
@@ -186,8 +186,8 @@ const Projetos = () => {
             <Carousel className="w-full">
               <CarouselContent>
                 {hackathons.map((hackathon) => (
-                  <CarouselItem key={hackathon.id} className={isMobile ? "basis-full" : "basis-1/3"}>
-                    <div className="rounded-lg overflow-hidden h-full relative border border-gray-200">
+                  <CarouselItem key={hackathon.id} className={isMobile ? "basis-full" : "basis-1/4"}>
+                    <div className="rounded-lg overflow-hidden h-full relative border border-gray-200 mx-2">
                       {hackathon.status && (
                         <span className="absolute top-2 right-2 bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded">
                           {hackathon.status}
@@ -229,8 +229,8 @@ const Projetos = () => {
             <Carousel className="w-full">
               <CarouselContent>
                 {grupos.map((grupo) => (
-                  <CarouselItem key={grupo.id} className={isMobile ? "basis-full" : "basis-1/3"}>
-                    <div className="rounded-lg overflow-hidden h-full relative border border-gray-200">
+                  <CarouselItem key={grupo.id} className={isMobile ? "basis-full" : "basis-1/4"}>
+                    <div className="rounded-lg overflow-hidden h-full relative border border-gray-200 mx-2">
                       {grupo.status && (
                         <span className="absolute top-2 right-2 bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded">
                           {grupo.status}
