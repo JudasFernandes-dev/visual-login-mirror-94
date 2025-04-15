@@ -20,10 +20,10 @@ const HackathonCard = ({ hackathon }: HackathonCardProps) => {
         </span>
       )}
       <div className="flex flex-col h-full">
-        <div className="bg-gray-800 p-4 text-white">
+        <div className="bg-gray-800 p-4 text-white" style={{ minHeight: "220px" }}>
           <h4 className="text-sm font-medium">{hackathon.titulo}</h4>
-          <p className="text-xs mt-2 mb-4">{hackathon.descricao}</p>
-          <div className="flex justify-between gap-2 mt-4">
+          <p className="text-xs mt-2 mb-4 line-clamp-4">{hackathon.descricao}</p>
+          <div className="flex justify-between gap-2 mt-auto">
             <button className="bg-white text-black text-xs px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
               participar
             </button>

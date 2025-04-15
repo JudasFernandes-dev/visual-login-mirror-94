@@ -27,7 +27,7 @@ const ProjetoCard = ({ projeto }: ProjetoCardProps) => {
             <Lightbulb className="w-7 h-7 text-black" />
           </div>
         </div>
-        <div className="bg-blue-400 p-4 text-white flex-grow">
+        <div className="bg-blue-400 p-4 text-white flex-grow" style={{ minHeight: "180px" }}>
           <p className="text-sm font-medium">{projeto.titulo}</p>
           <p className="text-sm mb-6">{projeto.empresa}</p>
           <div className="flex justify-between gap-2 mt-auto">

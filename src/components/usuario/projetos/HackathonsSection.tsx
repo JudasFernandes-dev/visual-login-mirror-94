@@ -18,14 +18,40 @@ interface HackathonsSectionProps {
 const HackathonsSection = ({ hackathons }: HackathonsSectionProps) => {
   const isMobile = useIsMobile();
 
+  // Adicionando mais hackathons para o carrossel
+  const todosHackathons = [
+    ...hackathons,
+    {
+      id: 4,
+      titulo: "Hackathon adicional 1",
+      descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In fermentum ultrices sollicitudin. Nam viverra magna a molestie.",
+      imagem: "/lovable-uploads/e81e5a94-cf17-44af-9574-ce0cf0f520a7.png",
+      status: "novo"
+    },
+    {
+      id: 5,
+      titulo: "Hackathon adicional 2",
+      descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In fermentum ultrices sollicitudin. Nam viverra magna a molestie.",
+      imagem: "/lovable-uploads/e81e5a94-cf17-44af-9574-ce0cf0f520a7.png",
+      status: "novo"
+    },
+    {
+      id: 6,
+      titulo: "Hackathon adicional 3",
+      descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In fermentum ultrices sollicitudin. Nam viverra magna a molestie.",
+      imagem: "/lovable-uploads/e81e5a94-cf17-44af-9574-ce0cf0f520a7.png",
+      status: "novo"
+    }
+  ];
+
   return (
     <div className="mb-8">
       <h3 className="text-md font-medium text-indigo-800 mb-4 px-4">hackatons</h3>
       
       <div className="relative">
-        <Carousel className="w-full">
+        <Carousel className="w-full" opts={{ slidesToScroll: isMobile ? 1 : 2 }}>
           <CarouselContent>
-            {hackathons.map((hackathon) => (
+            {todosHackathons.map((hackathon) => (
               <CarouselItem key={hackathon.id} className={isMobile ? "basis-full" : "basis-1/4"}>
                 <HackathonCard hackathon={hackathon} />
               </CarouselItem>

@@ -19,7 +19,7 @@ const GrupoCard = ({ grupo }: GrupoCardProps) => {
         </span>
       )}
       <div className="flex flex-col h-full">
-        <div className="bg-green-300 p-4 pt-24 flex-grow">
+        <div className="bg-green-300 p-4 pt-32 flex-grow">
           <div className="flex justify-between gap-2 mt-auto">
             <button className="bg-white text-black text-xs px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
               participar

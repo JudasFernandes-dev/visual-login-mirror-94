@@ -17,14 +17,37 @@ interface GruposSectionProps {
 const GruposSection = ({ grupos }: GruposSectionProps) => {
   const isMobile = useIsMobile();
 
+  // Adicionando mais grupos para o carrossel
+  const todosGrupos = [
+    ...grupos,
+    {
+      id: 4,
+      titulo: "Grupo adicional 1",
+      imagem: "/lovable-uploads/e81e5a94-cf17-44af-9574-ce0cf0f520a7.png",
+      status: "novo"
+    },
+    {
+      id: 5,
+      titulo: "Grupo adicional 2",
+      imagem: "/lovable-uploads/e81e5a94-cf17-44af-9574-ce0cf0f520a7.png",
+      status: "novo"
+    },
+    {
+      id: 6,
+      titulo: "Grupo adicional 3",
+      imagem: "/lovable-uploads/e81e5a94-cf17-44af-9574-ce0cf0f520a7.png",
+      status: "novo"
+    }
+  ];
+
   return (
     <div>
       <h3 className="text-md font-medium text-indigo-800 mb-4 px-4">Grupos</h3>
       
       <div className="relative">
-        <Carousel className="w-full">
+        <Carousel className="w-full" opts={{ slidesToScroll: isMobile ? 1 : 2 }}>
           <CarouselContent>
-            {grupos.map((grupo) => (
+            {todosGrupos.map((grupo) => (
               <CarouselItem key={grupo.id} className={isMobile ? "basis-full" : "basis-1/4"}>
                 <GrupoCard grupo={grupo} />
               </CarouselItem>

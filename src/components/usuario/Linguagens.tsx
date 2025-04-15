@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Settings, Code, Globe } from "lucide-react";
+import { Settings, Code, Globe, Trash2 } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -39,6 +39,10 @@ const Linguagens = () => {
     }
   };
   
+  const removerLinguagem = (id: number) => {
+    setLinguagens(linguagens.filter(linguagem => linguagem.id !== id));
+  };
+  
   const adicionarIdioma = () => {
     if (idiomaSelecionado) {
       const novoIdioma = {
@@ -51,6 +55,10 @@ const Linguagens = () => {
     }
   };
   
+  const removerIdioma = (id: number) => {
+    setIdiomas(idiomas.filter(idioma => idioma.id !== id));
+  };
+  
   const opcoesLinguagens = [
     "JavaScript", "Python", "Java", "C++", "Ruby", "Go", "PHP", "Swift", "Kotlin", "TypeScript"
   ];
@@ -61,14 +69,14 @@ const Linguagens = () => {
 
   return (
     <Card className="w-full bg-white rounded-lg border border-gray-200">
-      <CardContent className="p-4">
-        <div className="flex justify-between items-center mb-4 pb-2 border-b border-gray-200">
-          <h2 className="text-lg font-medium text-gray-800">Linguagens</h2>
+      <CardContent className="p-3">
+        <div className="flex justify-between items-center mb-3 pb-1 border-b border-gray-200">
+          <h2 className="text-base font-medium text-gray-800">Linguagens</h2>
           
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <Settings className="h-5 w-5" />
+              <Button variant="ghost" size="icon" className="h-7 w-7">
+                <Settings className="h-4 w-4" />
               </Button>
             </SheetTrigger>
             <SheetContent>
@@ -124,21 +132,21 @@ const Linguagens = () => {
           </Sheet>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-4">
           {/* Programação */}
           <div>
-            <h3 className="text-md font-medium mb-4 text-indigo-800 flex items-center">
-              <Code className="mr-2 h-4 w-4" /> programação
+            <h3 className="text-sm font-medium mb-2 text-indigo-800 flex items-center">
+              <Code className="mr-2 h-3 w-3" /> programação
             </h3>
             
-            <div className="mb-4">
-              <div className="grid grid-cols-2 gap-2 mb-3">
+            <div className="mb-2">
+              <div className="grid grid-cols-2 gap-2 mb-2">
                 <div className="col-span-2 sm:col-span-1">
                   <Select
                     value={linguagemSelecionada}
                     onValueChange={setLinguagemSelecionada}
                   >
-                    <SelectTrigger className="w-full">
+                    <SelectTrigger className="w-full h-8 text-xs">
                       <SelectValue placeholder="Selecionar linguagem" />
                     </SelectTrigger>
                     <SelectContent>
@@ -155,7 +163,7 @@ const Linguagens = () => {
                     value={nivelProgramacao}
                     onValueChange={setNivelProgramacao}
                   >
-                    <SelectTrigger className="w-full">
+                    <SelectTrigger className="w-full h-8 text-xs">
                       <SelectValue placeholder="Nível" />
                     </SelectTrigger>
                     <SelectContent>
@@ -169,26 +177,34 @@ const Linguagens = () => {
               
               <Button 
                 onClick={adicionarLinguagem} 
-                className="w-full mb-3"
+                className="w-full h-7 text-xs"
                 size="sm"
               >
                 Adicionar
               </Button>
             </div>
             
-            <div className="space-y-1 max-h-32 overflow-y-auto">
+            <div className="space-y-1 max-h-24 overflow-y-auto">
               {linguagens.map(linguagem => (
                 <div 
                   key={linguagem.id} 
-                  className="flex justify-between items-center p-1.5 border border-gray-300 rounded"
+                  className="flex justify-between items-center p-1 border border-gray-300 rounded"
                 >
                   <span className="flex items-center">
-                    <Code className="h-4 w-4 mr-2 text-blue-500" />
-                    {linguagem.nome}
+                    <Code className="h-3 w-3 mr-1 text-blue-500" />
+                    <span className="text-xs">{linguagem.nome}</span>
                   </span>
-                  <span className="bg-blue-100 text-blue-800 text-xs px-2 py-0.5 rounded">
-                    {linguagem.nivel}
-                  </span>
+                  <div className="flex items-center">
+                    <span className="bg-blue-100 text-blue-800 text-xs px-1.5 py-0.5 rounded mr-1">
+                      {linguagem.nivel}
+                    </span>
+                    <button 
+                      onClick={() => removerLinguagem(linguagem.id)} 
+                      className="text-red-500 hover:text-red-700"
+                    >
+                      <Trash2 className="h-3 w-3" />
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -196,18 +212,18 @@ const Linguagens = () => {
           
           {/* Idiomas */}
           <div>
-            <h3 className="text-md font-medium mb-4 text-indigo-800 flex items-center">
-              <Globe className="mr-2 h-4 w-4" /> idiomas
+            <h3 className="text-sm font-medium mb-2 text-indigo-800 flex items-center">
+              <Globe className="mr-2 h-3 w-3" /> idiomas
             </h3>
             
-            <div className="mb-4">
-              <div className="grid grid-cols-2 gap-2 mb-3">
+            <div className="mb-2">
+              <div className="grid grid-cols-2 gap-2 mb-2">
                 <div className="col-span-2 sm:col-span-1">
                   <Select
                     value={idiomaSelecionado}
                     onValueChange={setIdiomaSelecionado}
                   >
-                    <SelectTrigger className="w-full">
+                    <SelectTrigger className="w-full h-8 text-xs">
                       <SelectValue placeholder="Selecionar idioma" />
                     </SelectTrigger>
                     <SelectContent>
@@ -224,7 +240,7 @@ const Linguagens = () => {
                     value={nivelProgramacao}
                     onValueChange={setNivelProgramacao}
                   >
-                    <SelectTrigger className="w-full">
+                    <SelectTrigger className="w-full h-8 text-xs">
                       <SelectValue placeholder="Nível" />
                     </SelectTrigger>
                     <SelectContent>
@@ -238,26 +254,34 @@ const Linguagens = () => {
               
               <Button 
                 onClick={adicionarIdioma} 
-                className="w-full mb-3"
+                className="w-full h-7 text-xs"
                 size="sm"
               >
                 Adicionar
               </Button>
             </div>
             
-            <div className="space-y-1 max-h-32 overflow-y-auto">
+            <div className="space-y-1 max-h-24 overflow-y-auto">
               {idiomas.map(idioma => (
                 <div 
                   key={idioma.id} 
-                  className="flex justify-between items-center p-1.5 border border-gray-300 rounded"
+                  className="flex justify-between items-center p-1 border border-gray-300 rounded"
                 >
                   <span className="flex items-center">
-                    <Globe className="h-4 w-4 mr-2 text-green-500" />
-                    {idioma.nome}
+                    <Globe className="h-3 w-3 mr-1 text-green-500" />
+                    <span className="text-xs">{idioma.nome}</span>
                   </span>
-                  <span className="bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded">
-                    {idioma.nivel}
-                  </span>
+                  <div className="flex items-center">
+                    <span className="bg-green-100 text-green-800 text-xs px-1.5 py-0.5 rounded mr-1">
+                      {idioma.nivel}
+                    </span>
+                    <button 
+                      onClick={() => removerIdioma(idioma.id)} 
+                      className="text-red-500 hover:text-red-700"
+                    >
+                      <Trash2 className="h-3 w-3" />
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>

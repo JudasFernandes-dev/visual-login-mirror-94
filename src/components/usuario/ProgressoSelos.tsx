@@ -39,22 +39,22 @@ const ProgressoSelos = () => {
 
   return (
     <Card className="w-full bg-white rounded-lg border border-gray-200 mb-4">
-      <CardContent className="p-4">
-        <h2 className="text-base font-medium text-gray-800 mb-3 pb-1 border-b border-gray-200">Progresso dos selos</h2>
+      <CardContent className="p-3">
+        <h2 className="text-sm font-medium text-gray-800 mb-2 pb-1 border-b border-gray-200">Progresso dos selos</h2>
         
-        <div className="space-y-4">
+        <div className="space-y-3">
           {selos.map((selo) => (
-            <div key={selo.id} className="flex items-center space-x-3">
-              <div className={`h-8 w-8 rounded-full flex items-center justify-center text-white overflow-hidden`}>
+            <div key={selo.id} className="flex items-center space-x-2">
+              <div className="h-6 w-6 rounded-full flex items-center justify-center text-white overflow-hidden">
                 <img src={selo.icon} alt={selo.nome} className="h-full w-full object-cover" />
               </div>
               <div className="flex-1">
-                <div className="flex justify-between mb-1">
-                  <p className="text-sm font-medium">{selo.nome}</p>
-                  <span className="text-xs text-gray-500">{selo.progresso.toFixed(0)}% ({selo.current})</span>
+                <div className="flex justify-between mb-0.5">
+                  <p className="text-xs font-medium">{selo.nome}</p>
+                  <span className="text-xs text-gray-500">{selo.progresso.toFixed(0)}%</span>
                 </div>
-                <Progress value={selo.progresso} className="h-2 bg-gray-100" />
-                <p className="text-xs text-gray-400 mt-1">Meta: {selo.requirement}</p>
+                <Progress value={selo.progresso} className="h-1.5 bg-gray-100" />
+                <p className="text-[10px] text-gray-400 mt-0.5">{selo.current} / {selo.requirement}</p>
               </div>
             </div>
           ))}
