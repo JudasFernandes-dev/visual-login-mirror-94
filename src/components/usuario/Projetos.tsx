@@ -1,19 +1,12 @@
 
 import React, { useState } from "react";
-import { 
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { ChevronLeft, ChevronRight, Lightbulb } from "lucide-react";
+import CategoriaFilter from "./projetos/CategoriaFilter";
+import ProjetosSection from "./projetos/ProjetosSection";
+import HackathonsSection from "./projetos/HackathonsSection";
+import GruposSection from "./projetos/GruposSection";
 
 const Projetos = () => {
-  const isMobile = useIsMobile();
   const [filtroCategoria, setFiltroCategoria] = useState("Todos");
   
   const categorias = ["Todos", "Design", "Dev", "Marketing", "Gestão"];
@@ -90,11 +83,6 @@ const Projetos = () => {
     }
   ];
 
-  // Função para filtrar projetos por categoria
-  const projetosFiltrados = filtroCategoria === "Todos" 
-    ? projetos 
-    : projetos.filter(projeto => projeto.categoria === filtroCategoria);
-
   return (
     <Card className="w-full bg-white rounded-lg border border-gray-200">
       <CardContent className="p-6">
@@ -111,156 +99,20 @@ const Projetos = () => {
           </button>
         </div>
         
-        <div className="mb-8 px-4 relative">
-          <Carousel className="w-full">
-            <CarouselContent className="py-2">
-              {categorias.map((categoria, index) => (
-                <CarouselItem key={index} className={isMobile ? "basis-1/2" : "basis-1/5"}>
-                  <div 
-                    className={`border ${filtroCategoria === categoria ? 'border-blue-500 bg-blue-50' : 'border-gray-300'} rounded-md px-4 py-2 text-center text-gray-700 text-sm hover:bg-gray-50 cursor-pointer`}
-                    onClick={() => setFiltroCategoria(categoria)}
-                  >
-                    {categoria}
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="-left-4" />
-            <CarouselNext className="-right-4" />
-          </Carousel>
-        </div>
+        <CategoriaFilter 
+          categorias={categorias} 
+          filtroCategoria={filtroCategoria} 
+          setFiltroCategoria={setFiltroCategoria} 
+        />
         
-        {/* PROJETOS SECTION */}
-        <div className="mb-8">
-          <h3 className="text-md font-medium text-indigo-800 mb-4 px-4">projetos</h3>
-          
-          <div className="relative">
-            <Carousel className="w-full">
-              <CarouselContent>
-                {projetosFiltrados.map((projeto) => (
-                  <CarouselItem key={projeto.id} className={isMobile ? "basis-full" : "basis-1/4"}>
-                    <div className="rounded-lg overflow-hidden h-full relative border border-gray-200 mx-2">
-                      {projeto.status && (
-                        <span className="absolute top-2 right-2 bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded">
-                          {projeto.status}
-                        </span>
-                      )}
-                      <div className="flex flex-col h-full">
-                        <div className="bg-blue-400 relative pt-12 pb-2">
-                          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full bg-yellow-300 flex items-center justify-center">
-                            <Lightbulb className="w-7 h-7 text-black" />
-                          </div>
-                        </div>
-                        <div className="bg-blue-400 p-4 text-white flex-grow">
-                          <p className="text-sm font-medium">{projeto.titulo}</p>
-                          <p className="text-sm mb-6">{projeto.empresa}</p>
-                          <div className="flex justify-between gap-2 mt-auto">
-                            <button className="bg-white text-black text-xs px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
-                              participar
-                            </button>
-                            <button className="bg-white text-black text-xs px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
-                              saber +
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="-left-4 flex items-center justify-center">
-                <ChevronLeft className="h-4 w-4" />
-              </CarouselPrevious>
-              <CarouselNext className="-right-4 flex items-center justify-center">
-                <ChevronRight className="h-4 w-4" />
-              </CarouselNext>
-            </Carousel>
-          </div>
-        </div>
+        <ProjetosSection 
+          filtroCategoria={filtroCategoria} 
+          projetos={projetos} 
+        />
         
-        {/* HACKATONS SECTION */}
-        <div className="mb-8">
-          <h3 className="text-md font-medium text-indigo-800 mb-4 px-4">hackatons</h3>
-          
-          <div className="relative">
-            <Carousel className="w-full">
-              <CarouselContent>
-                {hackathons.map((hackathon) => (
-                  <CarouselItem key={hackathon.id} className={isMobile ? "basis-full" : "basis-1/4"}>
-                    <div className="rounded-lg overflow-hidden h-full relative border border-gray-200 mx-2">
-                      {hackathon.status && (
-                        <span className="absolute top-2 right-2 bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded">
-                          {hackathon.status}
-                        </span>
-                      )}
-                      <div className="flex flex-col h-full">
-                        <div className="bg-gray-800 p-4 text-white">
-                          <h4 className="text-sm font-medium">{hackathon.titulo}</h4>
-                          <p className="text-xs mt-2 mb-4">{hackathon.descricao}</p>
-                          <div className="flex justify-between gap-2 mt-4">
-                            <button className="bg-white text-black text-xs px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
-                              participar
-                            </button>
-                            <button className="bg-white text-black text-xs px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
-                              saber +
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="-left-4 bg-yellow-400 hover:bg-yellow-500 flex items-center justify-center">
-                <ChevronLeft className="h-4 w-4" />
-              </CarouselPrevious>
-              <CarouselNext className="-right-4 bg-orange-500 hover:bg-orange-600 flex items-center justify-center">
-                <ChevronRight className="h-4 w-4" />
-              </CarouselNext>
-            </Carousel>
-          </div>
-        </div>
+        <HackathonsSection hackathons={hackathons} />
         
-        {/* GRUPOS SECTION */}
-        <div>
-          <h3 className="text-md font-medium text-indigo-800 mb-4 px-4">Grupos</h3>
-          
-          <div className="relative">
-            <Carousel className="w-full">
-              <CarouselContent>
-                {grupos.map((grupo) => (
-                  <CarouselItem key={grupo.id} className={isMobile ? "basis-full" : "basis-1/4"}>
-                    <div className="rounded-lg overflow-hidden h-full relative border border-gray-200 mx-2">
-                      {grupo.status && (
-                        <span className="absolute top-2 right-2 bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded">
-                          {grupo.status}
-                        </span>
-                      )}
-                      <div className="flex flex-col h-full">
-                        <div className="bg-green-300 p-4 pt-24 flex-grow">
-                          <div className="flex justify-between gap-2 mt-auto">
-                            <button className="bg-white text-black text-xs px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
-                              participar
-                            </button>
-                            <button className="bg-white text-black text-xs px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
-                              saber +
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="-left-4 bg-blue-500 hover:bg-blue-600 flex items-center justify-center">
-                <ChevronLeft className="h-4 w-4" />
-              </CarouselPrevious>
-              <CarouselNext className="-right-4 bg-blue-500 hover:bg-blue-600 flex items-center justify-center">
-                <ChevronRight className="h-4 w-4" />
-              </CarouselNext>
-            </Carousel>
-          </div>
-        </div>
+        <GruposSection grupos={grupos} />
       </CardContent>
     </Card>
   );
