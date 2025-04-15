@@ -10,6 +10,11 @@ const Sidebar = () => {
     window.location.href = path;
   };
   
+  const handleEditProfile = () => {
+    // Open LinkedIn profile edit page - this is a mock URL based on the screenshot
+    window.open("https://www.linkedin.com/mypreferences/d/categories/account", "_blank");
+  };
+  
   const sidebarItems = [
     { icon: <Building size={16} className="text-gray-700" />, text: "Função", path: "/funcao" },
     { icon: <Github size={16} className="text-gray-700" />, text: "Github", path: "/github" },
@@ -50,7 +55,7 @@ const Sidebar = () => {
           <li className="my-4 flex justify-center">
             <Button 
               className="bg-blue-400 hover:bg-blue-500 rounded-full text-white text-xs py-1 px-5"
-              onClick={() => handleNavigate("/editar-perfil")}
+              onClick={handleEditProfile}
             >
               Editar Perfil
             </Button>

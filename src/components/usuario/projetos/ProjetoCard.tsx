@@ -27,10 +27,12 @@ const ProjetoCard = ({ projeto }: ProjetoCardProps) => {
             <Lightbulb className="w-7 h-7 text-black" />
           </div>
         </div>
-        <div className="bg-blue-400 p-4 text-white flex-grow" style={{ minHeight: "180px" }}>
-          <p className="text-sm font-medium">{projeto.titulo}</p>
-          <p className="text-sm mb-6">{projeto.empresa}</p>
-          <div className="flex justify-between gap-2 mt-auto">
+        <div className="bg-blue-400 p-4 text-white flex flex-col justify-between" style={{ minHeight: "240px" }}>
+          <div>
+            <p className="text-sm font-medium">{projeto.titulo}</p>
+            <p className="text-sm">{projeto.empresa}</p>
+          </div>
+          <div className="flex justify-between gap-2 mt-auto pt-6">
             <button className="bg-white text-black text-xs px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-100 w-full">
               participar
             </button>
