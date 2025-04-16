@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -67,7 +68,7 @@ const Linguagens = () => {
   ];
 
   return (
-    <Card className="w-full md:w-96 mx-auto bg-white rounded-lg border border-gray-200">
+    <Card className="w-full md:w-full mx-auto bg-white rounded-lg border border-gray-200">
       <CardContent className="p-3">
         <div className="flex justify-between items-center mb-3 pb-1 border-b border-gray-200">
           <h2 className="text-base font-medium text-gray-800">Linguagens</h2>

@@ -38,7 +38,7 @@ const ProgressoSelos = () => {
   ];
 
   return (
-    <Card className="w-full md:w-96 mx-auto bg-white rounded-lg border border-gray-200 mb-4">
+    <Card className="w-full md:w-full mx-auto bg-white rounded-lg border border-gray-200">
       <CardContent className="p-3">
         <h2 className="text-sm font-medium text-gray-800 mb-2 pb-1 border-b border-gray-200">Progresso dos selos</h2>
         
