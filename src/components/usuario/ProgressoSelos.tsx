@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { Trophy } from "lucide-react";
 
 const ProgressoSelos = () => {
   const [userData, setUserData] = useState({
@@ -37,12 +38,33 @@ const ProgressoSelos = () => {
     }
   ];
 
+  const proximosDesafios = [
+    {
+      id: 1,
+      titulo: "Completar 5 projetos de front-end",
+      dificuldade: "Médio",
+      xp: 500
+    },
+    {
+      id: 2,
+      titulo: "Participar de 2 hackathons",
+      dificuldade: "Difícil",
+      xp: 1000
+    },
+    {
+      id: 3,
+      titulo: "Colaborar com 3 novos membros",
+      dificuldade: "Fácil",
+      xp: 300
+    }
+  ];
+
   return (
     <Card className="w-full md:w-full mx-auto bg-white rounded-lg border border-gray-200">
       <CardContent className="p-3">
         <h2 className="text-sm font-medium text-gray-800 mb-2 pb-1 border-b border-gray-200">Progresso dos selos</h2>
         
-        <div className="space-y-3">
+        <div className="space-y-3 mb-4">
           {selos.map((selo) => (
             <div key={selo.id} className="flex items-center space-x-2">
               <div className="h-6 w-6 rounded-full flex items-center justify-center text-white overflow-hidden">
@@ -58,6 +80,33 @@ const ProgressoSelos = () => {
               </div>
             </div>
           ))}
+        </div>
+        
+        {/* Seção adicionada para equilibrar a altura do card */}
+        <div>
+          <h3 className="text-xs font-medium text-indigo-800 mb-2 flex items-center">
+            <Trophy className="mr-1 h-3 w-3" /> Próximos Desafios
+          </h3>
+          <div className="space-y-2">
+            {proximosDesafios.map((desafio) => (
+              <div 
+                key={desafio.id} 
+                className="border border-gray-100 rounded p-1.5 bg-gray-50"
+              >
+                <p className="text-xs font-medium mb-0.5">{desafio.titulo}</p>
+                <div className="flex justify-between items-center">
+                  <span className={`text-[10px] px-1 py-0.5 rounded ${
+                    desafio.dificuldade === "Fácil" ? "bg-green-100 text-green-800" : 
+                    desafio.dificuldade === "Médio" ? "bg-yellow-100 text-yellow-800" : 
+                    "bg-red-100 text-red-800"
+                  }`}>
+                    {desafio.dificuldade}
+                  </span>
+                  <span className="text-[10px] text-purple-700 font-medium">+{desafio.xp} XP</span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </CardContent>
     </Card>
