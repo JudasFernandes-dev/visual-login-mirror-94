@@ -17,8 +17,8 @@ const Usuario = () => {
         <Sidebar />
         
         <div className="flex-grow bg-gray-50 overflow-y-auto">
-          <div className="container mx-auto py-4 px-4">
-            <div className="flex flex-col gap-4">
+          <div className="container mx-auto py-4 px-4 max-w-4xl">
+            <div className="flex flex-col items-center gap-4">
               <Linguagens />
               <ProgressoSelos />
               <Projetos />

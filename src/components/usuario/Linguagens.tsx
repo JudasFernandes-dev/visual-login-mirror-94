@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -68,7 +67,7 @@ const Linguagens = () => {
   ];
 
   return (
-    <Card className="w-full bg-white rounded-lg border border-gray-200">
+    <Card className="w-full md:w-96 mx-auto bg-white rounded-lg border border-gray-200">
       <CardContent className="p-3">
         <div className="flex justify-between items-center mb-3 pb-1 border-b border-gray-200">
           <h2 className="text-base font-medium text-gray-800">Linguagens</h2>
@@ -132,7 +131,7 @@ const Linguagens = () => {
           </Sheet>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid md:grid-cols-1 gap-4">
           {/* Programação */}
           <div>
             <h3 className="text-sm font-medium mb-2 text-indigo-800 flex items-center">
