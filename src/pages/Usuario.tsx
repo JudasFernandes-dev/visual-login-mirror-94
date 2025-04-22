@@ -19,13 +19,13 @@ const Usuario = () => {
         <div className="flex-grow bg-gray-50 overflow-y-auto">
           <div className="container mx-auto py-4 px-4">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-              {/* Coluna Esquerda */}
-              <div className="lg:col-span-2">
+              {/* Coluna Esquerda - Reduzida para dar mais espaço à coluna central */}
+              <div className="lg:col-span-1">
                 {/* Conteúdo da coluna esquerda */}
               </div>
               
-              {/* Coluna Central */}
-              <div className="lg:col-span-7">
+              {/* Coluna Central - Aumentada para ocupar mais espaço à esquerda */}
+              <div className="lg:col-span-8">
                 <Projetos />
               </div>
               
