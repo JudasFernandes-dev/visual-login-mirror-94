@@ -25,7 +25,7 @@ const Usuario = () => {
               </div>
               
               {/* Coluna Central */}
-              <div className="lg:col-span-6">
+              <div className="lg:col-span-6 w-full">
                 <Projetos />
               </div>
               
