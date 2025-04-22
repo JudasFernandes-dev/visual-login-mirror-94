@@ -17,20 +17,23 @@ const Usuario = () => {
         <Sidebar />
         
         <div className="flex-grow bg-gray-50 overflow-y-auto">
-          <div className="container mx-auto py-4 px-4 max-w-5xl">
-            <div className="flex flex-col gap-4">
-              {/* Cards em linha para telas médias e grandes */}
-              <div className="flex flex-col md:flex-row gap-4 justify-center">
-                <div className="w-full md:w-1/2">
-                  <Linguagens />
-                </div>
-                <div className="w-full md:w-1/2">
-                  <ProgressoSelos />
-                </div>
+          <div className="container mx-auto py-4 px-4">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+              {/* Coluna Esquerda */}
+              <div className="lg:col-span-3">
+                {/* Conteúdo da coluna esquerda */}
               </div>
               
-              {/* Projetos sempre abaixo */}
-              <Projetos />
+              {/* Coluna Central */}
+              <div className="lg:col-span-6">
+                <Projetos />
+              </div>
+              
+              {/* Coluna Direita */}
+              <div className="lg:col-span-3 space-y-4">
+                <Linguagens />
+                <ProgressoSelos />
+              </div>
             </div>
           </div>
         </div>
