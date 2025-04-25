@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -41,19 +40,19 @@ const GruposSection = ({ grupos }: GruposSectionProps) => {
   ];
 
   return (
-    <div className="px-4">
-      <h3 className="text-md font-medium text-indigo-800 mb-4">Grupos</h3>
+    <div className="px-8">
+      <h3 className="text-md font-medium text-indigo-800 mb-6">Grupos</h3>
       
-      <div className="relative w-full max-w-[calc(100vw-120px)] mx-auto">
+      <div className="relative w-full max-w-[calc(100vw-160px)] mx-auto">
         <Carousel className="w-full" opts={{ 
           align: "start",
           slidesToScroll: isMobile ? 1 : 2,
           containScroll: "trimSnaps"
         }}>
-          <CarouselContent className="-ml-4">
+          <CarouselContent className="-ml-8">
             {todosGrupos.map((grupo) => (
-              <CarouselItem key={grupo.id} className={isMobile ? "basis-full pl-4" : "basis-1/3 pl-4"}>
-                <div className="p-2">
+              <CarouselItem key={grupo.id} className={isMobile ? "basis-full pl-8" : "basis-1/3 pl-8"}>
+                <div className="p-3">
                   <GrupoCard grupo={grupo} />
                 </div>
               </CarouselItem>

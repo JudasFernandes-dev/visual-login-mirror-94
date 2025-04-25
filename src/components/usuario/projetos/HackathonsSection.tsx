@@ -1,6 +1,6 @@
+
 import React from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import HackathonCard from "./HackathonCard";
 
@@ -43,19 +43,19 @@ const HackathonsSection = ({ hackathons }: HackathonsSectionProps) => {
   ];
 
   return (
-    <div className="mb-8 px-4">
-      <h3 className="text-md font-medium text-indigo-800 mb-4">hackatons</h3>
+    <div className="mb-12 px-8">
+      <h3 className="text-md font-medium text-indigo-800 mb-6">hackatons</h3>
       
-      <div className="relative w-full max-w-[calc(100vw-120px)] mx-auto">
+      <div className="relative w-full max-w-[calc(100vw-160px)] mx-auto">
         <Carousel className="w-full" opts={{ 
           align: "start",
           slidesToScroll: isMobile ? 1 : 2,
           containScroll: "trimSnaps"
         }}>
-          <CarouselContent className="-ml-4">
+          <CarouselContent className="-ml-8">
             {todosHackathons.map((hackathon) => (
-              <CarouselItem key={hackathon.id} className={isMobile ? "basis-full pl-4" : "basis-1/3 pl-4"}>
-                <div className="p-2">
+              <CarouselItem key={hackathon.id} className={isMobile ? "basis-full pl-8" : "basis-1/3 pl-8"}>
+                <div className="p-3">
                   <HackathonCard hackathon={hackathon} />
                 </div>
               </CarouselItem>
