@@ -41,24 +41,24 @@ const GruposSection = ({ grupos }: GruposSectionProps) => {
   ];
 
   return (
-    <div>
-      <h3 className="text-md font-medium text-indigo-800 mb-4 px-4">Grupos</h3>
+    <div className="px-4">
+      <h3 className="text-md font-medium text-indigo-800 mb-4">Grupos</h3>
       
-      <div className="relative">
-        <Carousel className="w-full" opts={{ slidesToScroll: isMobile ? 1 : 2 }}>
-          <CarouselContent>
+      <div className="relative w-full max-w-[calc(100vw-120px)] mx-auto">
+        <Carousel className="w-full" opts={{ 
+          align: "start",
+          slidesToScroll: isMobile ? 1 : 2,
+          containScroll: "trimSnaps"
+        }}>
+          <CarouselContent className="ml-0">
             {todosGrupos.map((grupo) => (
-              <CarouselItem key={grupo.id} className={isMobile ? "basis-full" : "basis-1/4"}>
+              <CarouselItem key={grupo.id} className={isMobile ? "basis-full pl-4" : "basis-1/3 pl-4"}>
                 <GrupoCard grupo={grupo} />
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="-left-4 bg-blue-500 hover:bg-blue-600 flex items-center justify-center">
-            <ChevronLeft className="h-4 w-4" />
-          </CarouselPrevious>
-          <CarouselNext className="-right-4 bg-blue-500 hover:bg-blue-600 flex items-center justify-center">
-            <ChevronRight className="h-4 w-4" />
-          </CarouselNext>
+          <CarouselPrevious className="absolute -left-12 top-1/2 transform -translate-y-1/2 bg-white hover:bg-gray-100 border border-gray-200" />
+          <CarouselNext className="absolute -right-12 top-1/2 transform -translate-y-1/2 bg-white hover:bg-gray-100 border border-gray-200" />
         </Carousel>
       </div>
     </div>
