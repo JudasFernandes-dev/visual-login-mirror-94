@@ -64,15 +64,17 @@ const ProjetosSection = ({ filtroCategoria, projetos }: ProjetosSectionProps) =>
           slidesToScroll: isMobile ? 1 : 2,
           containScroll: "trimSnaps"
         }}>
-          <CarouselContent className="ml-0">
+          <CarouselContent className="-ml-4">
             {todosProjetos.map((projeto) => (
               <CarouselItem key={projeto.id} className={isMobile ? "basis-full pl-4" : "basis-1/3 pl-4"}>
-                <ProjetoCard projeto={projeto} />
+                <div className="p-2">
+                  <ProjetoCard projeto={projeto} />
+                </div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="absolute -left-12 top-1/2 transform -translate-y-1/2 bg-white hover:bg-gray-100 border border-gray-200" />
-          <CarouselNext className="absolute -right-12 top-1/2 transform -translate-y-1/2 bg-white hover:bg-gray-100 border border-gray-200" />
+          <CarouselPrevious className="absolute -left-12 top-1/2 transform -translate-y-1/2" />
+          <CarouselNext className="absolute -right-12 top-1/2 transform -translate-y-1/2" />
         </Carousel>
       </div>
     </div>

@@ -49,8 +49,8 @@ const Sidebar = () => {
           
           <li className="my-4 flex justify-center">
             <Button 
-              className="bg-blue-400 hover:bg-blue-500 rounded-full text-white text-xs py-1 px-5"
               onClick={() => handleNavigate("/editar-perfil")}
+              className="bg-white hover:bg-gray-50 text-blue-600 rounded-full text-xs py-1.5 px-6 shadow-sm border border-blue-100 transition-all duration-200"
             >
               Editar Perfil
             </Button>
